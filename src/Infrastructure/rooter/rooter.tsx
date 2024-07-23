@@ -9,22 +9,15 @@ export const rooter = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    children: [
-      {
-        index: true,
-        element: <Login />,
-      },
-      {
-        path: "password-forget",
-        element: <PasswordForget />,
-      },
-      {
-        path: "sign-up",
-        element: <SignUp />,
-      },
-    ],
   },
-
+  {
+    path: "/password-forget",
+    element: <PasswordForget />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
   {
     path: "/",
     element: <Layout />,

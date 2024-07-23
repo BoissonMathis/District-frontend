@@ -27,7 +27,7 @@ export function LoginForm() {
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
       </div>
-      <a onClick={() => navigate("/passwordForget")} className="form-a">
+      <a onClick={() => navigate("/password-forget")} className="form-a">
         Mot de passe oublié ?
       </a>
       <div className="auth-input-checkbox mb-12">
@@ -40,7 +40,7 @@ export function LoginForm() {
       >
         Valider
       </button>
-      <a className="form-a" onClick={() => navigate("/signup")}>
+      <a className="form-a" onClick={() => navigate("/sign-up")}>
         Pas encore inscrit ? S'inscrire
       </a>
     </div>

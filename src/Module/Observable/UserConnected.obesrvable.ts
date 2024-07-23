@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { User } from "../../Infrastructure/User.ts/User.type";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { setUserToken } from "./UserToken.observable";
+import { setUserToken, userToken$ } from "./UserToken.observable";
 import { useEffect, useState } from "react";
 
 let userConnected: User = {
@@ -30,6 +30,21 @@ export const postLoginUser = async (username: string, password: string) => {
     }catch(e: any){
         // console.log('ERROR:', e)
         // console.log(e.response.status)
+        handleError(e.response.status)
+    }
+}
+
+export const postNewUser = async (email: string, username: string, password: string, status: string) => {
+    console.log({email: email, username: username, password: password, status: status})
+    try {
+        const response = await AxiosService.postNewUser(email, username, password, status)
+        console.log(response)
+        if(response.status == 201){
+            postLoginUser(username, password)
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+        console.log(e.response.status)
         handleError(e.response.status)
     }
 }
