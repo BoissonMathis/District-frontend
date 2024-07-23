@@ -7,7 +7,9 @@ export function SignUpForm() {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [status, setStatus] = useState<string>("joueur");
+  const [termsOfUseChecked, setTermsOfUseChecked] = useState<boolean>(false);
   const navigate = useNavigate();
   /// faire la partie condition d'utilisation (si open : overlay visible, sinon invisible)
   return (
@@ -41,10 +43,20 @@ export function SignUpForm() {
       </div>
       <div className="auth-input-text-form mb-6">
         <label htmlFor="confirm-password">Confirmer le mot de passe</label>
-        <input className="auth-input-text" type="text" id="confirm-password" />
+        <input
+          className="auth-input-text"
+          type="text"
+          id="confirm-password"
+          onChange={(e) => setConfirmPassword(e.currentTarget.value)}
+        />
       </div>
       <div className="auth-input-checkbox mb-8">
-        <input type="checkbox" name="remember" id="remember" />
+        <input
+          type="checkbox"
+          name="remember"
+          id="remember"
+          onChange={() => setTermsOfUseChecked(!termsOfUseChecked)}
+        />
         <label htmlFor="remember">
           J'ai lu et j'accepte les conditions d'utilisation
         </label>
@@ -70,7 +82,16 @@ export function SignUpForm() {
       </div>
       <button
         className="auth-btn mb-4"
-        onClick={() => postNewUser(email, username, password, status)}
+        onClick={() =>
+          postNewUser(
+            email,
+            username,
+            password,
+            confirmPassword,
+            status,
+            termsOfUseChecked
+          )
+        }
       >
         S'inscrire
       </button>

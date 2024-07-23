@@ -1,8 +1,9 @@
 import { BehaviorSubject } from "rxjs";
 import { User } from "../../Infrastructure/User.ts/User.type";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { setUserToken, userToken$ } from "./UserToken.observable";
+import { setUserToken } from "./UserToken.observable";
 import { useEffect, useState } from "react";
+import { handleError } from "./Errors.observable";
 
 let userConnected: User = {
     username: '',
@@ -34,38 +35,31 @@ export const postLoginUser = async (username: string, password: string) => {
     }
 }
 
-export const postNewUser = async (email: string, username: string, password: string, status: string) => {
-    console.log({email: email, username: username, password: password, status: status})
-    try {
-        const response = await AxiosService.postNewUser(email, username, password, status)
-        console.log(response)
-        if(response.status == 201){
-            postLoginUser(username, password)
+export const postNewUser = async (email: string, username: string, password: string, confirmPassword: string, status: string, checked: boolean) => {
+    if(password == confirmPassword && checked){
+        try {
+            const response = await AxiosService.postNewUser(email, username, password, status)
+            console.log(response)
+            if(response.status == 201){
+                postLoginUser(username, password)
+            }
+        }catch(e: any){
+            console.log('ERROR:', e)
+            console.log(e.response.status)
+            handleError(e.response.status)
         }
-    }catch(e: any){
-        console.log('ERROR:', e)
-        console.log(e.response.status)
-        handleError(e.response.status)
+    }else{
+        if(checked)
+            console.log('Le mot de passe et sa confirmation ne correspondent pas')
+        else
+            console.log("veuillez accepter les conditions d'utilisations")
     }
+    
 }
 
 export const setUserConnected = async (user: User) => {
     userConnected = user
     return userConnected$.next(userConnected)
-}
-
-const handleError = (error: number) => {
-    if (error) {
-        if(error == 500){
-            console.log('Tous les champs doivent etre complétée')
-        }else if(error == 401){
-            console.log("paire nom d'utilisateur/mot de passe incorrecte")
-        }else{
-            console.log(error)
-        }
-    }else{
-        console.log('une erreur inconnue est survenu')
-    }
 }
 
 export const useUserConnected = () => {

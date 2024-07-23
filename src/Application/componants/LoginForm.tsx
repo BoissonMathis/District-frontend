@@ -8,7 +8,7 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="col items-center justify-center">
       <div className="auth-input-text-form mb-12">
         <label htmlFor="username">Email/Nom d'utilisateur</label>
         <input
@@ -30,7 +30,7 @@ export function LoginForm() {
       <a onClick={() => navigate("/password-forget")} className="form-a">
         Mot de passe oublié ?
       </a>
-      <div className="auth-input-checkbox mb-12">
+      <div className="auth-input-checkbox mb-8">
         <input type="checkbox" name="remember" id="remember" />
         <label htmlFor="remember">Se souvenir de moi</label>
       </div>
