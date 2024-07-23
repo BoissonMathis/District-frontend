@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+  
+@layer utilities {
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.10);
+    }
+
+    .b-beige {
+        background-color: #FFF9ED
+    }
+
+    .b-soft-brown {
+        background-color: #EDD3BA
+    }
+
+    .b-brown {
+        background-color: #CDA178;
+    }
+
+    .c-beige {
+        color: #FFF9ED;
+    }
+
+    .c-soft-brown {
+        color: #EDD3BA;
+    }
+
+    .c-brown {
+        color: #CDA178;
+    }
+
+    .col {
+        display: flex;
+        flex-direction: column
+    }
+
+    .border-beige {
+        border-color: #FFF9ED;
+    }
+
+    .border-soft-brown {
+        border-color: #EDD3BA;
+    }
+    
+    .border-brown {
+        border-color: #CDA178;
+    }
+}
+
+@layer components {
+
+    /* authentication */
+    .auth-btn {
+        @apply b-brown text-black font-bold py-2 px-4 rounded-xl;
+    }
+
+    .auth-input-text-form {
+        @apply col w-64 mx-auto
+    }
+
+    .auth-input-text {
+        @apply h-8 b-soft-brown rounded-2xl pl-4
+    }
+
+    .auth-input-checkbox {
+        @apply flex items-center gap-2 mx-auto
+    }
+
+    .auth-input-select {
+        @apply flex gap-2 place-content-center
+    }
+
+    .form-a {
+        @apply underline w-fit mx-auto mb-6 text-sm cursor-pointer
+    }
+}
