@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BehaviorSubject } from "rxjs";
 
-type Token = {
+export type Token = {
     token: string | null
   }
 

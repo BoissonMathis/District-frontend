@@ -5,6 +5,7 @@ import { useState } from "react";
 export function LoginForm() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [remember_me, setRememberMe] = useState<boolean>(false);
   const navigate = useNavigate();
 
   return (
@@ -31,12 +32,16 @@ export function LoginForm() {
         Mot de passe oublié ?
       </a>
       <div className="auth-input-checkbox mb-8">
-        <input type="checkbox" id="remember" />
+        <input
+          type="checkbox"
+          id="remember"
+          onChange={() => setRememberMe(!remember_me)}
+        />
         <label htmlFor="remember">Se souvenir de moi</label>
       </div>
       <button
         className="auth-btn mb-4"
-        onClick={() => postLoginUser(username, password)}
+        onClick={() => postLoginUser(username, password, remember_me)}
       >
         Valider
       </button>

@@ -1,3 +1,4 @@
+import { Token } from '../../Module/Observable/UserToken.observable'
 import { http } from './axios.instance'
 
 export class AxiosService {
@@ -17,6 +18,17 @@ export class AxiosService {
             return response
         } catch (error) {
             console.log("ERROR => ", error)
+            throw error
+        }
+    }
+
+    static updateUser = async (user_id: string, valid_token: Token, updateBody: object) => {
+        console.log(user_id, valid_token, updateBody)
+        try {
+            const response = await http.put(`/user/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`, 'Accept' : 'application/json', 'Content-Type': 'application/json'}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
             throw error
         }
     }

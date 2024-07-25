@@ -1,11 +1,12 @@
 import { BehaviorSubject } from "rxjs";
 import { User } from "../../Infrastructure/User.ts/User.type";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { setUserToken } from "./UserToken.observable";
+import { setUserToken, userToken$ } from "./UserToken.observable";
 import { useEffect, useState } from "react";
 import { setError } from "./Errors.observable";
 
 let userConnected: User = {
+    _id: '',
     username: '',
     email: '',
     status: '',
@@ -19,18 +20,24 @@ let userConnected: User = {
 
 export const userConnected$ = new BehaviorSubject(userConnected)
 
-export const postLoginUser = async (username: string, password: string) => {
+export const postLoginUser = async (username: string, password: string, remember_me: boolean) => {
     try {
         const response = await AxiosService.postLogin(username, password)
-        // console.log(response)
-        // console.log(response.status)
         if(response.status == 200 && response.data && response.data.token){
             setUserToken(response.data.token)
             setUserConnected(response.data)
+            console.log('Id :', userConnected$.getValue()._id)
+            if(remember_me == true){
+                try {
+                    await AxiosService.updateUser(userConnected$.getValue()._id, userToken$.getValue(), {token: userToken$.getValue()})
+                }catch(e: any){
+                    console.log('ERROR:', e)
+                    setError(e.response.data.msg)
+                }
+            }
         }
     }catch(e: any){
         console.log('ERROR:', e)
-        // console.log(e.response.status)
         setError(e.response.data.msg)
     }
 }
@@ -41,7 +48,7 @@ export const postNewUser = async (email: string, username: string, password: str
             const response = await AxiosService.postNewUser(email, username, password, status)
             console.log(response)
             if(response.status == 201){
-                postLoginUser(username, password)
+                postLoginUser(username, password, false)
             }
         }catch(e: any){
             console.log('ERROR:', e)
@@ -63,6 +70,7 @@ export const setUserConnected = async (user: User) => {
 
 export const useUserConnected = () => {
     const [userConnected, setUserConnected] = useState<User>({
+        _id: '',
         username: '',
         email: '',
         status: '',
