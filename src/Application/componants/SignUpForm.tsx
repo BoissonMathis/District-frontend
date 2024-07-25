@@ -13,7 +13,7 @@ export function SignUpForm() {
   const navigate = useNavigate();
   /// faire la partie condition d'utilisation (si open : overlay visible, sinon invisible)
   return (
-    <div>
+    <div className="col items-center justify-center">
       <div className="auth-input-text-form mb-8">
         <label htmlFor="email">Email</label>
         <input
@@ -41,7 +41,7 @@ export function SignUpForm() {
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
       </div>
-      <div className="auth-input-text-form mb-6">
+      <div className="auth-input-text-form mb-4">
         <label htmlFor="confirm-password">Confirmer le mot de passe</label>
         <input
           className="auth-input-text"
@@ -50,10 +50,9 @@ export function SignUpForm() {
           onChange={(e) => setConfirmPassword(e.currentTarget.value)}
         />
       </div>
-      <div className="auth-input-checkbox mb-8">
+      <div className="auth-input-checkbox mb-4">
         <input
           type="checkbox"
-          name="remember"
           id="remember"
           onChange={() => setTermsOfUseChecked(!termsOfUseChecked)}
         />
@@ -70,8 +69,8 @@ export function SignUpForm() {
       <div className="auth-input-select mb-4">
         <label htmlFor="new-user-status-list">Vous êtes </label>
         <select
-          name="new-user-status-list"
-          className="w-2/5 border-2 rounded-xl border-soft-brown pl-1"
+          id="new-user-status-list"
+          className="w-auto border-2 rounded-xl border-soft-brown pl-1 pb-1"
           onChange={(e) => setStatus(e.currentTarget.value)}
         >
           <option value="educateur">éducateur</option>

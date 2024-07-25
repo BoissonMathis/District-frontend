@@ -3,7 +3,7 @@ import { User } from "../../Infrastructure/User.ts/User.type";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
 import { setUserToken } from "./UserToken.observable";
 import { useEffect, useState } from "react";
-import { handleError } from "./Errors.observable";
+import { setError } from "./Errors.observable";
 
 let userConnected: User = {
     username: '',
@@ -29,9 +29,9 @@ export const postLoginUser = async (username: string, password: string) => {
             setUserConnected(response.data)
         }
     }catch(e: any){
-        // console.log('ERROR:', e)
+        console.log('ERROR:', e)
         // console.log(e.response.status)
-        handleError(e.response.status)
+        setError(e.response.data.msg)
     }
 }
 
@@ -46,15 +46,14 @@ export const postNewUser = async (email: string, username: string, password: str
         }catch(e: any){
             console.log('ERROR:', e)
             console.log(e.response.status)
-            handleError(e.response.status)
+            setError(e.response.data.msg)
         }
     }else{
-        if(checked)
-            console.log('Le mot de passe et sa confirmation ne correspondent pas')
+        if(password !== confirmPassword)
+            setError('Le mot de passe et sa confirmation ne correspondent pas')
         else
-            console.log("veuillez accepter les conditions d'utilisations")
-    }
-    
+            setError("veuillez accepter les conditions d'utilisations")
+    } 
 }
 
 export const setUserConnected = async (user: User) => {

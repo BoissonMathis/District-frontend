@@ -31,7 +31,7 @@ export function LoginForm() {
         Mot de passe oublié ?
       </a>
       <div className="auth-input-checkbox mb-8">
-        <input type="checkbox" name="remember" id="remember" />
+        <input type="checkbox" id="remember" />
         <label htmlFor="remember">Se souvenir de moi</label>
       </div>
       <button
