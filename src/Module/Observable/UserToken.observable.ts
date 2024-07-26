@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BehaviorSubject } from "rxjs";
+import { setUserConnected } from "./UserConnected.observable";
 
 export type Token = {
     token: string | null
-  }
+}
 
 let userToken: Token = { token : null}
 
@@ -26,6 +28,13 @@ export const useUserToken = () => {
     }, [])
 
     return userToken
+}
+
+export const useLogOut = () => {
+    const navigate = useNavigate()
+    setUserToken({token: ''})
+    setUserConnected({_id: '', username: '', email: '', status: '', bio: '', profil_image: '', banner_image: '', follows: [], created_at: '', token: ''})
+    navigate('/login')
 }
 
 // voir http only + cookies

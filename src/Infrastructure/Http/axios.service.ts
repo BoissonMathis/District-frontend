@@ -23,13 +23,22 @@ export class AxiosService {
     }
 
     static updateUser = async (user_id: string, valid_token: Token, updateBody: object) => {
-        console.log(user_id, valid_token, updateBody)
         try {
-            const response = await http.put(`/user/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`, 'Accept' : 'application/json', 'Content-Type': 'application/json'}})
+            const response = await http.put(`/user/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`} })
             return response
         }catch(error){
             console.log("ERROR =>", error)
             throw error
         }
     }
+
+    // static getUserPosts = async () => {
+    //     try{
+    //         const response = await http.get(`/post/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`} })
+    //         return response
+    //     }catch(error){
+    //         console.log("ERROR =>", error)
+    //         throw error
+    //     }
+    // }
 }

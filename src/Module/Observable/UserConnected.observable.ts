@@ -26,7 +26,6 @@ export const postLoginUser = async (username: string, password: string, remember
         if(response.status == 200 && response.data && response.data.token){
             setUserToken(response.data.token)
             setUserConnected(response.data)
-            console.log('Id :', userConnected$.getValue()._id)
             if(remember_me == true){
                 try {
                     await AxiosService.updateUser(userConnected$.getValue()._id, userToken$.getValue(), {token: userToken$.getValue()})
@@ -52,12 +51,11 @@ export const postNewUser = async (email: string, username: string, password: str
             }
         }catch(e: any){
             console.log('ERROR:', e)
-            console.log(e.response.status)
             setError(e.response.data.msg)
         }
     }else{
         if(password !== confirmPassword)
-            setError('Le mot de passe et sa confirmation ne correspondent pas')
+            setError("Le mot de passe et sa confirmation ne correspondent pas")
         else
             setError("veuillez accepter les conditions d'utilisations")
     } 

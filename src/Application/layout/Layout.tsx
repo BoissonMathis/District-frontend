@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { UserNav } from "../componants/UserNav";
 
 export function Layout() {
   return (
-    <div>
-      <p>test layout</p>
+    <div className="b-beige h-screen">
+      <UserNav />
       <main>
         <Outlet />
       </main>

@@ -2,8 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import { Login } from "../../Application/pages/Login";
 import { SignUp } from "../../Application/pages/SignUp";
 import { PasswordForget } from "../../Application/pages/PasswordForget";
-import { App } from "../../Module/App";
+import { App } from "../../Application/pages/App";
 import { Layout } from "../../Application/layout/Layout";
+import { UserProfil } from "../../Application/componants/UserProfil";
 
 export const rooter = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const rooter = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: "/profil",
+        element: <UserProfil />,
       },
     ],
   },

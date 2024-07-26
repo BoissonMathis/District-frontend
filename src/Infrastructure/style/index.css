@@ -61,7 +61,7 @@
     }
 
     .auth-input-text {
-        @apply h-8 b-soft-brown rounded-2xl pl-4
+        @apply h-8 b-soft-brown rounded-2xl pl-4 border-2 border-brown
     }
 
     .auth-input-checkbox {
@@ -75,4 +75,28 @@
     .form-a {
         @apply underline w-fit mx-auto mb-6 text-sm cursor-pointer
     }
+
+    /* app */
+
+    .search-bar {
+        @apply w-64 b-soft-brown rounded-2xl pl-4 border-2 border-brown
+    }
+
+    .user-profil-picture-2xl {
+        @apply h-24 rounded-full object-cover border-2 border-brown
+    }
+
+    .user-profil-picture-xl {
+        @apply h-16 rounded-full object-cover border-2 border-brown
+    }
+
+    .user-banner {
+        @apply w-full h-64 object-cover border-b-2 border-brown rounded-bl-3xl rounded-br-3xl
+    }
+    
+    .user-profil-button {
+        @apply px-6 py-2 border-2 border-brown rounded-2xl
+    }
+
+    
 }

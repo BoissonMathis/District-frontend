@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postNewUser } from "../../Module/Observable/UserConnected.obesrvable";
+import { postNewUser } from "../../Module/Observable/UserConnected.observable";
 
 export function SignUpForm() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
