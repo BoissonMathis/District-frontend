@@ -9,7 +9,7 @@ export const App = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="b-beige h-screen">
+    <div className="b-beige">
       <p>Bienvenue {userConnected.username}</p>
     </div>
   );

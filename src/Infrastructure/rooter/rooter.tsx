@@ -4,7 +4,9 @@ import { SignUp } from "../../Application/pages/SignUp";
 import { PasswordForget } from "../../Application/pages/PasswordForget";
 import { App } from "../../Application/pages/App";
 import { Layout } from "../../Application/layout/Layout";
-import { UserProfil } from "../../Application/componants/UserProfil";
+import { UserProfilPage } from "../../Application/pages/UserProfil";
+import { Events } from "../../Application/pages/Events";
+import { Settings } from "../../Application/pages/Settings";
 
 export const rooter = createBrowserRouter([
   {
@@ -29,7 +31,15 @@ export const rooter = createBrowserRouter([
       },
       {
         path: "/profil",
-        element: <UserProfil />,
+        element: <UserProfilPage />,
+      },
+      {
+        path: "/events",
+        element: <Events />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
       },
     ],
   },
