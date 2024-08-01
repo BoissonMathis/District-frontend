@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useUserToken } from "../../Module/Observable/UserToken.observable";
-import { SignUpForm } from "../componants/SignUpForm";
+import { SignUpForm } from "../componants/connection/SignUpForm";
 import { useEffect } from "react";
 import { ErrorMessage } from "../componants/ErrorMessage";
 import { setError } from "../../Module/Observable/Errors.observable";

@@ -26,14 +26,19 @@ export const postLoginUser = async (username: string, password: string, remember
         if(response.status == 200 && response.data && response.data.token){
             setUserToken(response.data.token)
             setUserConnected(response.data)
-            if(remember_me == true){
-                try {
-                    await AxiosService.updateUser(userConnected$.getValue()._id, userToken$.getValue(), {token: userToken$.getValue()})
-                }catch(e: any){
-                    console.log('ERROR:', e)
-                    setError(e.response.data.msg)
-                }
-            }
+            console.log(response.data)
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+        setError(e.response.data.msg)
+    }
+}
+
+export const postLogoutUser = async (user_id: string) => {
+    try {
+        const response = await AxiosService.postLogout(user_id)
+        if(response.status == 200){
+            console.log(response.data)
         }
     }catch(e: any){
         console.log('ERROR:', e)

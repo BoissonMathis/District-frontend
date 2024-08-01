@@ -12,6 +12,16 @@ export class AxiosService {
         }
     }
 
+    static postLogout = async (user_id: string) => {
+        try {
+            const response = await http.post('/logout/'+user_id)
+            return response
+        } catch (error) {
+            console.log("ERROR => ", error)
+            throw error
+        }
+    }
+
     static postNewUser = async (email: string, username: string, password: string, status: string) => {
         try {
             const response = await http.post('/user', { email: email, username: username, password: password, status: status})
@@ -32,13 +42,23 @@ export class AxiosService {
         }
     }
 
-    // static getUserPosts = async () => {
-    //     try{
-    //         const response = await http.get(`/post/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`} })
-    //         return response
-    //     }catch(error){
-    //         console.log("ERROR =>", error)
-    //         throw error
-    //     }
-    // }
+    static postUserPost = async (user_id: string, contentText: string, valid_token: Token) => {
+        try{
+            const response = await http.post("/post", { user: user_id, contentText: contentText}, { headers: {"Authorization" : `Bearer ${valid_token}`}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static getUserPosts = async (user_id: string, valid_token: string) => {
+        try{
+            const response = await http.get(`/post/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`} })
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
 }

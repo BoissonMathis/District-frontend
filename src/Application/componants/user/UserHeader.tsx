@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useUserConnected } from "../../Module/Observable/UserConnected.observable";
-import { BrownLine } from "./BrownLine";
+import {
+  postLogoutUser,
+  useUserConnected,
+} from "../../../Module/Observable/UserConnected.observable";
+import { BrownLine } from "../BrownLine";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { IoNotificationsSharp } from "react-icons/io5";
 import {
   setCurrentPage,
   useCurrentPage,
-} from "../../Module/Observable/CurrentPage.observable";
+} from "../../../Module/Observable/CurrentPage.observable";
 
 export function UserHeader() {
   const userConnected = useUserConnected();
@@ -47,6 +50,7 @@ export function UserHeader() {
           <RiLogoutCircleRLine
             className="h-8 w-8 cursor-pointer"
             onClick={() => {
+              // postLogoutUser(userConnected._id);
               navigate("/login");
             }}
           />

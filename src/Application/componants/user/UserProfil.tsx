@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { useUserConnected } from "../../Module/Observable/UserConnected.observable";
-import { BrownLine } from "./BrownLine";
+import { useUserConnected } from "../../../Module/Observable/UserConnected.observable";
+import { BrownLine } from "../BrownLine";
 import { MdEdit } from "react-icons/md";
+import { setUpdateFormUser } from "../../../Module/Observable/modal/UpdateFormUser.observable";
 
 export function UserProfil() {
   const [currentSection, setCurrentSection] = useState<string>("posts");
   const user = useUserConnected();
 
   return (
-    <div>
+    <>
       <div>
         <img src={user.banner_image} alt="" className="user-banner" />
       </div>
@@ -36,7 +37,10 @@ export function UserProfil() {
       </div>
       <div className="flex justify-between">
         <span className="pl-6">{user.bio}</span>
-        <MdEdit className="mr-16 mb-4 h-6 w-6 cursor-pointer" />
+        <MdEdit
+          className="mr-16 mb-4 h-6 w-6 cursor-pointer"
+          onClick={() => setUpdateFormUser()}
+        />
       </div>
       <BrownLine />
       <div className="flex gap-32 justify-center pt-6">
@@ -68,6 +72,6 @@ export function UserProfil() {
           événements
         </button>
       </div>
-    </div>
+    </>
   );
 }

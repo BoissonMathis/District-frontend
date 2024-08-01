@@ -16,7 +16,11 @@
     }
 
     .b-brown {
-        background-color: #CDA178;
+        background-color: #CDA178
+    }
+
+    .b-gray-70 {
+        background-color: rgba(229, 231, 235, 0.7)
     }
 
     .c-beige {
@@ -88,6 +92,10 @@
 
     .user-profil-picture-xl {
         @apply h-16 rounded-full object-cover border-2 border-brown
+    }
+
+    .user-profil-picture-xs {
+        @apply h-8 rounded-full object-cover border-2 border-brown
     }
 
     .user-banner {
