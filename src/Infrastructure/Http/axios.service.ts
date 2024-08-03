@@ -2,6 +2,8 @@ import { Token } from '../../Module/Observable/UserToken.observable'
 import { http } from './axios.instance'
 
 export class AxiosService {
+
+    //User
     static postLogin = async (username: string, password: string) => {
         try {
             const response = await http.post('/login', { username: username, password: password})
@@ -52,13 +54,15 @@ export class AxiosService {
         }
     }
 
-    static getUserPosts = async (user_id: string, valid_token: string) => {
+    //post
+    static getManyUserPosts = async (user_id: string, valid_token: Token, page: number) => {
         try{
-            const response = await http.get(`/post/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`} })
+            const response = await http.get(`/posts_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: user_id, page: page, pageSize: 5, field: 'user'} })
             return response
         }catch(error){
             console.log("ERROR =>", error)
             throw error
         }
     }
+
 }

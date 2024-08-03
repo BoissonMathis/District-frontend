@@ -10,12 +10,17 @@ import {
   Token,
   useUserToken,
 } from "../../../Module/Observable/UserToken.observable";
+import {
+  setUserConnectedPosts,
+  useUserConnectedPosts,
+} from "../../../Module/Observable/UserConnectedPosts.observable";
 
 export function PostNewPostForm() {
   const [formContentText, setFormcContentText] = useState<string>("");
   const user_connected = useUserConnected();
   const token = useUserToken();
   const user = useUserConnected();
+  const posts = useUserConnectedPosts();
   return (
     <div className="flex flex-col gap-4 h-fit w-2/5 p-4 rounded-xl border-2 border-brown b-soft-brown absolute bottom-16 right-36 z-10">
       <div className="flex justify-between">
@@ -49,9 +54,9 @@ export function PostNewPostForm() {
         />
       </div>
       <button
-        onClick={() =>
-          postUserPost(user_connected._id, formContentText, token as Token)
-        }
+        onClick={() => {
+          postUserPost(user_connected._id, formContentText, token as Token);
+        }}
         className="flex justify-center self-center w-64 b-brown text-black font-bold py-2 px-4 rounded-xl"
       >
         publier
