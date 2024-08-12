@@ -17,7 +17,7 @@ export const usePostFormStatus = () => {
     const [updatePostForm, setUpdatePostForm] = useState<boolean>(false);
 
     useEffect(() => {
-        const subscription = postForm$.subscribe((newPostForm) => setUpdatePostForm(newPostForm))
+        const subscription = postForm$.subscribe((newPostFormStatus) => setUpdatePostForm(newPostFormStatus))
         return () => {
             subscription.unsubscribe();
         };
@@ -26,13 +26,17 @@ export const usePostFormStatus = () => {
     return updatePostForm
 }
 
-export const postUserPost = async (user_id: string, contentText: string, valid_token: Token) => {
+export const postUserPost = async (user_id: string, contentText: string, token: Token) => {
     try {
-        const response = await AxiosService.postUserPost(user_id, contentText, valid_token)
-        if(response.status == 201){
-            console.log(response.data)
+        const response = await AxiosService.postUserPost(user_id, contentText, token);
+        console.log(response)
+        if (response.status === 201 && response.data) {
+            return response.data;
+        } else {
+            throw new Error('Failed to post');
         }
-    }catch(error: any){
-        console.log('ERROR:', error)
+    } catch (error) {
+        console.error('Error posting user post:', error);
+        throw error;
     }
-}
+};

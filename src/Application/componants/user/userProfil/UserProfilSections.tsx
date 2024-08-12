@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { UserProfilPosts } from "./UserProfilPosts";
+import { UserProfilComments } from "./UserProfilComments";
+import { UserProfilEvents } from "./UserProfilEvent";
 
 export function UserProfilSections() {
   const [currentSection, setCurrentSection] = useState<string>("posts");
   return (
     <div className="flex flex-col">
-      <div className="flex gap-32 justify-center pt-6">
+      <div className="flex gap-32 justify-center pt-6 pb-8">
         <button
           value={"posts"}
           onClick={(e) => setCurrentSection(e.currentTarget.value)}
@@ -35,6 +37,8 @@ export function UserProfilSections() {
         </button>
       </div>
       {currentSection == "posts" && <UserProfilPosts />}
+      {currentSection == "comments" && <UserProfilComments />}
+      {currentSection == "events" && <UserProfilEvents />}
     </div>
   );
 }

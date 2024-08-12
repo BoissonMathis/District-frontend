@@ -1,15 +1,15 @@
 import { ImCross } from "react-icons/im";
 import { AiFillPicture } from "react-icons/ai";
-import { setUpdateFormUser } from "../../../Module/Observable/modal/UpdateFormUser.observable";
+import { setUpdateFormUser } from "../../../../Module/Observable/modal/UpdateFormUser.observable";
 import {
   putUpdateUser,
   useUserConnected,
-} from "../../../Module/Observable/UserConnected.observable";
+} from "../../../../Module/Observable/UserConnected.observable";
 import { useEffect, useState } from "react";
 import {
   Token,
   useUserToken,
-} from "../../../Module/Observable/UserToken.observable";
+} from "../../../../Module/Observable/UserToken.observable";
 
 export function UpdateUserForm() {
   const user = useUserConnected();

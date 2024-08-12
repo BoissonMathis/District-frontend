@@ -7,12 +7,19 @@ export type Token = {
     token: string | null
 }
 
-let userToken: Token = { token : null}
+let initialValue: Token = { token : null}
+
+let userToken: Token = initialValue
 
 export const userToken$ = new BehaviorSubject(userToken)
 
 export const setUserToken = async (token: Token) => {
     userToken = token
+    return userToken$.next(userToken)
+}
+
+export const resetUserToken = async () => {
+    userToken = initialValue
     return userToken$.next(userToken)
 }
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useUserConnected } from "../../../Module/Observable/UserConnected.observable";
-import { BrownLine } from "../BrownLine";
+import { useUserConnected } from "../../../../Module/Observable/UserConnected.observable";
+import { BrownLine } from "../../BrownLine";
 import { MdEdit } from "react-icons/md";
-import { setUpdateFormUser } from "../../../Module/Observable/modal/UpdateFormUser.observable";
+import { setUpdateFormUser } from "../../../../Module/Observable/modal/UpdateFormUser.observable";
 import { UserProfilSections } from "./UserProfilSections";
 
 export function UserProfil() {

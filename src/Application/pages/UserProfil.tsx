@@ -1,13 +1,25 @@
-import { UserProfil } from "../componants/user/UserProfil";
-import { UpdateUserForm } from "../componants/user/UpdateUserForm";
+import Auth from "../../Module/auth";
+import { UserProfil } from "../componants/user/userProfil/UserProfil";
+import { UpdateUserForm } from "../componants/user/userProfil/UpdateUserForm";
 import { useUpdateFormUser } from "../../Module/Observable/modal/UpdateFormUser.observable";
+import { useEventFormStatus } from "../../Module/Observable/modal/EventForm.observable";
+import { CreateEventForm } from "../componants/user/userProfil/CreateEventForm";
 
-export function UserProfilPage() {
-  const updateFormOpen = useUpdateFormUser();
+const UserProfilPage = () => {
+  const updateFormOpened = useUpdateFormUser();
+  const createEventFormOpened = useEventFormStatus();
 
   return (
     <div className="flex-1">
-      {updateFormOpen ? <UpdateUserForm /> : <UserProfil />}
+      {updateFormOpened ? (
+        <UpdateUserForm />
+      ) : createEventFormOpened ? (
+        <CreateEventForm />
+      ) : (
+        <UserProfil />
+      )}
     </div>
   );
-}
+};
+
+export default Auth(UserProfilPage);

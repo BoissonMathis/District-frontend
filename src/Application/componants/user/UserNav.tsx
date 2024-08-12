@@ -6,8 +6,13 @@ import {
   setCurrentPage,
   useCurrentPage,
 } from "../../../Module/Observable/CurrentPage.observable";
+import {
+  postLogoutUser,
+  useUserConnected,
+} from "../../../Module/Observable/UserConnected.observable";
 
 export function UserNav() {
+  const user = useUserConnected();
   const currentPage = useCurrentPage();
   const navigate = useNavigate();
 
@@ -16,7 +21,7 @@ export function UserNav() {
       <div
         className="flex items-center gap-2 cursor-pointer"
         onClick={() => {
-          navigate("/"), setCurrentPage("/");
+          postLogoutUser(user._id);
         }}
       >
         <IoHomeSharp />

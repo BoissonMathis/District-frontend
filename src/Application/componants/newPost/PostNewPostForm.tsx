@@ -1,10 +1,6 @@
 import { ImCross } from "react-icons/im";
 import { AiFillPicture } from "react-icons/ai";
 import { useUserConnected } from "../../../Module/Observable/UserConnected.observable";
-import {
-  postUserPost,
-  setPostForm,
-} from "../../../Module/Observable/modal/PostForm.observable";
 import { useState } from "react";
 import {
   Token,
@@ -13,7 +9,15 @@ import {
 import {
   setUserConnectedPosts,
   useUserConnectedPosts,
+  Post,
+  PostInfos,
+  userConnectedPosts$,
 } from "../../../Module/Observable/UserConnectedPosts.observable";
+import {
+  postUserPost,
+  setPostForm,
+} from "../../../Module/Observable/modal/PostForm.observable";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 
 export function PostNewPostForm() {
   const [formContentText, setFormcContentText] = useState<string>("");
@@ -21,8 +25,31 @@ export function PostNewPostForm() {
   const token = useUserToken();
   const user = useUserConnected();
   const posts = useUserConnectedPosts();
+
+  const handlePost = async () => {
+    try {
+      const newPost = await postUserPost(
+        user_connected._id,
+        formContentText,
+        // token as Token
+        localStorage.token
+      );
+      if (newPost) {
+        const updatedPosts: PostInfos = {
+          count: 1,
+          page: posts ? posts.page : 1,
+          posts: [newPost],
+        };
+        setUserConnectedPosts(updatedPosts);
+        setPostForm();
+      }
+    } catch (error) {
+      console.error("Error adding new post:", error);
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-4 h-fit w-2/5 p-4 rounded-xl border-2 border-brown b-soft-brown absolute bottom-16 right-36 z-10">
+    <div className="flex flex-col gap-4 h-fit w-2/5 p-4 rounded-xl border-2 border-brown b-soft-brown fixed bottom-16 right-36 z-10">
       <div className="flex justify-between">
         <div className="flex gap-4 items-center">
           <img
@@ -54,9 +81,7 @@ export function PostNewPostForm() {
         />
       </div>
       <button
-        onClick={() => {
-          postUserPost(user_connected._id, formContentText, token as Token);
-        }}
+        onClick={handlePost}
         className="flex justify-center self-center w-64 b-brown text-black font-bold py-2 px-4 rounded-xl"
       >
         publier
