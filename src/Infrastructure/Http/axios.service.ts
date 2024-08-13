@@ -15,9 +15,11 @@ export class AxiosService {
         }
     }
 
-    static postLogout = async (user_id: string) => {
+    static postLogout = async (user_id: string, valid_token: Token) => {
+        console.log("postLogout déclecnhé")
         try {
-            const response = await http.post('/logout/'+user_id)
+            const response = await http.post(`/logout/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token.token}`} })
+            console.log(response)
             return response
         } catch (error) {
             console.log("ERROR => ", error)
@@ -48,7 +50,7 @@ export class AxiosService {
 
     static updateUser = async (user_id: string, valid_token: Token, updateBody: object) => {
         try {
-            const response = await http.put(`/user/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token.token}`} })
+            const response = await http.put(`/user/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`} })
             return response
         }catch(error){
             console.log("ERROR =>", error)
@@ -102,7 +104,7 @@ export class AxiosService {
     static getManyUserEvents = async (user_id: string, valid_token: Token, page: number) => {
         try {
             const response = await http.get(`/events_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: user_id, page: page, pageSize: 5, field: 'user', populate: true} })
-            console.log('Appel récupération events :', response)
+            // console.log('Appel récupération events :', response)
             return response
         }catch(error){
             console.log("ERROR =>", error)
@@ -121,9 +123,19 @@ export class AxiosService {
     }
 
     static postUserEvent = async (event: Event, valid_token: Token) => {
-        console.log('Event envoyé :', event)
+        // console.log('Event envoyé :', event)
         try{
             const response = await http.post("/event", { ...event }, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static getUserConnectedFeed = async (user_id: string, valid_token: Token) => {
+        try{
+            const response = await http.get(`/feed/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true}})
             return response
         }catch(error){
             console.log("ERROR =>", error)

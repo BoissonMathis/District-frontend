@@ -20,8 +20,9 @@ export type PostInfos = {
     page: number,
     posts: Post[]
 }
+let initialValue: PostInfos = {count: 0, page: 1, posts: []}
 
-let userConnectedPosts: PostInfos = {count: 0, page: 1, posts: []}
+let userConnectedPosts: PostInfos = initialValue
 
 export const userConnectedPosts$ = new BehaviorSubject(userConnectedPosts)
 
@@ -38,6 +39,11 @@ export const setUserConnectedPosts = async (newPosts: PostInfos) => {
         page: newPosts.page, 
         posts: [...userConnectedPosts.posts, ...postsToAdd]
     }
+    return userConnectedPosts$.next(userConnectedPosts)
+}
+
+export const resetUserConnectedPosts = async () => {
+    userConnectedPosts = initialValue
     return userConnectedPosts$.next(userConnectedPosts)
 }
 

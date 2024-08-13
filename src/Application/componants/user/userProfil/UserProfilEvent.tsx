@@ -5,7 +5,7 @@ import {
   Event,
   useUserConnectedEvents,
 } from "../../../../Module/Observable/UserConnectedEvent.observable";
-import { EventComponant } from "../../newPost/event/Event";
+import { EventComponant } from "../../event/Event";
 
 export function UserProfilEvents() {
   const [displayEvents, setDisplayEvents] = useState<Event[]>([]);

@@ -1,4 +1,3 @@
-import { BrownLine } from "../componants/BrownLine";
 import { MdEdit } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
@@ -17,8 +16,6 @@ export function EventDetail() {
     if (token && id) {
       try {
         const response = await AxiosService.getOneEventById(id, token);
-        console.log(response);
-        console.log(response.data.user);
         if (response.status === 200) {
           setEvent(response.data);
           setUser(response.data.user);

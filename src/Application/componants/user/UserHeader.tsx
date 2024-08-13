@@ -11,10 +11,12 @@ import {
   setCurrentPage,
   useCurrentPage,
 } from "../../../Module/Observable/CurrentPage.observable";
+import { useUserToken } from "../../../Module/Observable/UserToken.observable";
 
 export function UserHeader() {
   const userConnected = useUserConnected();
   const currentPage = useCurrentPage();
+  const token = useUserToken();
   const navigate = useNavigate();
 
   return (
@@ -50,8 +52,8 @@ export function UserHeader() {
           <RiLogoutCircleRLine
             className="h-8 w-8 cursor-pointer"
             onClick={() => {
-              // postLogoutUser(userConnected._id);
-              navigate("/login");
+              postLogoutUser(userConnected._id, token!);
+              // navigate("/login");
             }}
           />
         </div>

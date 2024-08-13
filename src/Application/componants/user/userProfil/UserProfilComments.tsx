@@ -14,8 +14,6 @@ export function UserProfilComments() {
     UserConnectedComments
       ? setDisplayComments(UserConnectedComments?.comments)
       : setDisplayComments([]);
-    console.log(displayComments);
-    console.log(UserConnectedComments);
   }, [UserConnectedComments]);
 
   return (

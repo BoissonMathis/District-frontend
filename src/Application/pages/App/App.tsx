@@ -6,6 +6,7 @@ import {
   useUserToken,
 } from "../../../Module/Observable/UserToken.observable";
 import { getUserConnectedPosts } from "../../../Module/Observable/UserConnectedPosts.observable";
+import { UserFeed } from "../../componants/user/UserFeed";
 
 export function App() {
   const userConnected = useUserConnected();
@@ -15,8 +16,8 @@ export function App() {
   // console.log(localStorage);
 
   return (
-    <div className="b-beige">
-      <p>Bienvenue {userConnected.username}</p>
+    <div className="flex flex-col b-beige w-full items-center pt-8 pb-8">
+      <UserFeed />
     </div>
   );
 }

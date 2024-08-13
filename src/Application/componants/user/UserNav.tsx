@@ -18,12 +18,7 @@ export function UserNav() {
 
   return (
     <div className="flex flex col p-4 gap-4 border-r border-r-3 border-black h-auto w-fit">
-      <div
-        className="flex items-center gap-2 cursor-pointer"
-        onClick={() => {
-          postLogoutUser(user._id);
-        }}
-      >
+      <div className="flex items-center gap-2 cursor-pointer">
         <IoHomeSharp />
         <span>accueil</span>
       </div>

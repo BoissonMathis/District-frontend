@@ -1,13 +1,14 @@
 import { BehaviorSubject } from "rxjs";
 import { User } from "../../Infrastructure/User.ts/User.type";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { resetUserToken, setUserToken, Token, userToken$ } from "./UserToken.observable";
+import { resetUserToken, setUserToken, Token } from "./UserToken.observable";
 import { useEffect, useState } from "react";
 import { setError } from "./Errors.observable";
 import { setUpdateFormUser } from "./modal/UpdateFormUser.observable";
-import { getUserConnectedPosts, setUserConnectedPosts } from "./UserConnectedPosts.observable";
-import { getUserConnectedComments } from "./UserConnectedComments.observable";
-import { getUserConnectedEvents } from "./UserConnectedEvent.observable";
+import { getUserConnectedPosts, resetUserConnectedPosts } from "./UserConnectedPosts.observable";
+import { getUserConnectedComments, resetUserConnectedComments } from "./UserConnectedComments.observable";
+import { getUserConnectedEvents, resetUserConnectedEvents } from "./UserConnectedEvent.observable";
+import { getUserConnectedFeed } from "./UserConnectedFeed.observable";
 
 let initialValue: User = {
     _id: '',
@@ -69,8 +70,10 @@ export const postLoginUser = async (username: string, password: string, remember
             getUserConnectedPosts(response.data._id, response.data.token, 1)
             getUserConnectedComments(response.data._id, response.data.token, 1)
             getUserConnectedEvents(response.data._id, response.data.token, 1)
+            getUserConnectedFeed(response.data._id, response.data.token)
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userId', response.data._id);
+            localStorage.setItem('remember_me', remember_me.toString())
         }
     }catch(e: any){
         console.log('ERROR:', e)
@@ -78,13 +81,16 @@ export const postLoginUser = async (username: string, password: string, remember
     }
 }
 
-export const postLogoutUser = async (user_id: string) => {
+export const postLogoutUser = async (user_id: string, token_valid: Token) => {
+    console.log("postLogoutUser déclenché")
     try {
-        const response = await AxiosService.postLogout(user_id)
+        const response = await AxiosService.postLogout(user_id, token_valid)
         if(response.status == 200){
-            // localStorage.removeItem("token");
-            // localStorage.removeItem("userId");
-            localStorage.clear()
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            resetUserConnectedComments()
+            resetUserConnectedEvents()
+            resetUserConnectedPosts()
             resetUserConnected()
             resetUserToken()
         }
