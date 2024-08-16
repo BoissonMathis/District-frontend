@@ -1,7 +1,6 @@
 import { BehaviorSubject } from "rxjs";
 import { useEffect, useState } from "react";
-import { Post } from "./UserConnectedPosts.observable";
-
+import { Post } from "./userConnected/UserConnectedPosts.observable";
 
 let initialValue: Post[] = []
 

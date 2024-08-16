@@ -1,8 +1,8 @@
 import { BehaviorSubject } from "rxjs";
 import { useEffect, useState } from "react";
 import { AxiosService } from "../../../Infrastructure/Http/axios.service";
-import { Token } from "../UserToken.observable";
-import { Event } from "../UserConnectedEvent.observable";
+import { Token } from "../userConnected/UserToken.observable";
+import { Event } from "../userConnected/UserConnectedEvent.observable";
 
 let evenForm: boolean = false
 

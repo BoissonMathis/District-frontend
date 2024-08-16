@@ -1,18 +1,18 @@
 import { ImCross } from "react-icons/im";
 import { AiFillPicture } from "react-icons/ai";
-import { useUserConnected } from "../../../Module/Observable/UserConnected.observable";
+import { useUserConnected } from "../../../Module/Observable/userConnected/UserConnected.observable";
 import { useState } from "react";
 import {
   Token,
   useUserToken,
-} from "../../../Module/Observable/UserToken.observable";
+} from "../../../Module/Observable/userConnected/UserToken.observable";
 import {
   setUserConnectedPosts,
   useUserConnectedPosts,
   Post,
   PostInfos,
   userConnectedPosts$,
-} from "../../../Module/Observable/UserConnectedPosts.observable";
+} from "../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import {
   postUserPost,
   setPostForm,

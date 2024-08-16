@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import {
   Comment,
   useUserConnectedComments,
-} from "../../../../Module/Observable/UserConnectedComments.observable";
+} from "../../../../Module/Observable/userConnected/UserConnectedComments.observable";
 import { CommentComposant } from "../../comment/Comment";
-// import { PostComponant } from "../../post/Post";
 
-export function UserProfilComments() {
+export function UserConnectedProfilComments() {
   const [displayComments, setDisplayComments] = useState<Comment[]>([]);
   const UserConnectedComments = useUserConnectedComments();
 

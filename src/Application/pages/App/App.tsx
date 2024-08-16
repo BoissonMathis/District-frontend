@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserConnected } from "../../../Module/Observable/UserConnected.observable";
+import { useUserConnected } from "../../../Module/Observable/userConnected/UserConnected.observable";
 import {
   Token,
   useUserToken,
-} from "../../../Module/Observable/UserToken.observable";
-import { getUserConnectedPosts } from "../../../Module/Observable/UserConnectedPosts.observable";
+} from "../../../Module/Observable/userConnected/UserToken.observable";
+import { getUserConnectedPosts } from "../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import { UserFeed } from "../../componants/user/UserFeed";
 
 export function App() {

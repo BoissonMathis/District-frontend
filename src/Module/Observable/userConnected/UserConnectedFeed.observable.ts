@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BehaviorSubject } from "rxjs";
 import { Token } from "./UserToken.observable";
-import { AxiosService } from "../../Infrastructure/Http/axios.service";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 import { Post } from "./UserConnectedPosts.observable";
 
 export type Feed = {

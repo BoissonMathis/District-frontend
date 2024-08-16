@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { BehaviorSubject } from "rxjs";
-import { AxiosService } from "../../Infrastructure/Http/axios.service";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 import { Token } from "./UserToken.observable";
-import { User } from "../../Infrastructure/User.ts/User.type";
+import { User } from "../../../Infrastructure/User.ts/User.type";
 
 export type Post = {
     _id: string,

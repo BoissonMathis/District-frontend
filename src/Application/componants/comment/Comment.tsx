@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Comment } from "../../../Module/Observable/UserConnectedComments.observable";
+import { Comment } from "../../../Module/Observable/userConnected/UserConnectedComments.observable";
 import { BrownLine } from "../BrownLine";
 import { FaCommentAlt } from "react-icons/fa";
 import { IoFootball } from "react-icons/io5";

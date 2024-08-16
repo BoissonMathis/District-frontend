@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import { useEffect, useState } from "react";
 import { AxiosService } from "../../../Infrastructure/Http/axios.service";
-import { Token } from "../UserToken.observable";
+import { Token } from "../userConnected/UserToken.observable";
 
 let postForm: boolean = false
 

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import {
   postLogoutUser,
   useUserConnected,
-} from "../../../Module/Observable/UserConnected.observable";
+} from "../../../Module/Observable/userConnected/UserConnected.observable";
 import { BrownLine } from "../BrownLine";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { RiLogoutCircleRLine } from "react-icons/ri";
@@ -11,7 +11,7 @@ import {
   setCurrentPage,
   useCurrentPage,
 } from "../../../Module/Observable/CurrentPage.observable";
-import { useUserToken } from "../../../Module/Observable/UserToken.observable";
+import { useUserToken } from "../../../Module/Observable/userConnected/UserToken.observable";
 
 export function UserHeader() {
   const userConnected = useUserConnected();
@@ -36,7 +36,8 @@ export function UserHeader() {
             alt="Photo de profil de l'utilisateur"
             className="user-profil-picture-xl cursor-pointer"
             onClick={() => {
-              navigate("/profil"), setCurrentPage("profil");
+              navigate(`/profil/${userConnected._id}`),
+                setCurrentPage("profil");
             }}
           />
         </div>

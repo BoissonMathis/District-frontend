@@ -1,9 +1,9 @@
 import Auth from "../../Module/auth";
 import { UserProfil } from "../componants/user/userProfil/UserProfil";
-import { UpdateUserForm } from "../componants/user/userProfil/UpdateUserForm";
+import { UpdateUserForm } from "../componants/user/userConnected/UpdateUserForm";
 import { useUpdateFormUser } from "../../Module/Observable/modal/UpdateFormUser.observable";
 import { useEventFormStatus } from "../../Module/Observable/modal/EventForm.observable";
-import { CreateEventForm } from "../componants/user/userProfil/CreateEventForm";
+import { CreateEventForm } from "../componants/user/userConnected/CreateEventForm";
 
 const UserProfilPage = () => {
   const updateFormOpened = useUpdateFormUser();

@@ -4,12 +4,12 @@ import { setUpdateFormUser } from "../../../../Module/Observable/modal/UpdateFor
 import {
   putUpdateUser,
   useUserConnected,
-} from "../../../../Module/Observable/UserConnected.observable";
+} from "../../../../Module/Observable/userConnected/UserConnected.observable";
 import { useEffect, useState } from "react";
 import {
   Token,
   useUserToken,
-} from "../../../../Module/Observable/UserToken.observable";
+} from "../../../../Module/Observable/userConnected/UserToken.observable";
 
 export function UpdateUserForm() {
   const user = useUserConnected();

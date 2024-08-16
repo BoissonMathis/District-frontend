@@ -1,4 +1,4 @@
-import { Post } from "../../../Module/Observable/UserConnectedPosts.observable";
+import { Post } from "../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import { FaCommentAlt } from "react-icons/fa";
 import { IoFootball } from "react-icons/io5";
 import { BiRepost } from "react-icons/bi";
@@ -16,7 +16,12 @@ export function PostComponant(props: PostProps) {
 
   return (
     <div className="flex flex-col gap-4 min-w-full b-breige ">
-      <div className="flex gap-4 items-center">
+      <div
+        className="flex gap-4 items-center cursor-pointer"
+        onClick={() => {
+          navigate(`/profil/${postInfo.user._id}`);
+        }}
+      >
         <img
           src={user.profil_image}
           alt=""

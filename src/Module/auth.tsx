@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   authUser,
   useUserConnected,
-} from "./Observable/UserConnected.observable";
+} from "./Observable/userConnected/UserConnected.observable";
 
 const Auth = <P extends object>(
   WrappedComponent: ComponentType<P>

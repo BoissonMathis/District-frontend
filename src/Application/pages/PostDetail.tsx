@@ -4,9 +4,9 @@ import { BiRepost } from "react-icons/bi";
 import { BrownLine } from "../componants/BrownLine";
 import { useParams } from "react-router-dom";
 import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { useUserToken } from "../../Module/Observable/UserToken.observable";
+import { useUserToken } from "../../Module/Observable/userConnected/UserToken.observable";
 import { useEffect, useState } from "react";
-import { Post } from "../../Module/Observable/UserConnectedPosts.observable";
+import { Post } from "../../Module/Observable/userConnected/UserConnectedPosts.observable";
 
 export function PostDetail() {
   const [post, setPost] = useState<Post | null>(null);

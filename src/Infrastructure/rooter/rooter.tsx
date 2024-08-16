@@ -32,7 +32,7 @@ export const rooter = createBrowserRouter([
         element: <ProtectedApp />,
       },
       {
-        path: "/profil",
+        path: "/profil/:id",
         element: <UserProfilPage />,
       },
       {

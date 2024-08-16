@@ -4,13 +4,13 @@ import {
   setEventForm,
 } from "../../../../Module/Observable/modal/EventForm.observable";
 import { ImCross } from "react-icons/im";
-import { useUserConnected } from "../../../../Module/Observable/UserConnected.observable";
+import { useUserConnected } from "../../../../Module/Observable/userConnected/UserConnected.observable";
 import {
   Event,
   EventsInfo,
   setUserConnectedEvents,
   useUserConnectedEvents,
-} from "../../../../Module/Observable/UserConnectedEvent.observable";
+} from "../../../../Module/Observable/userConnected/UserConnectedEvent.observable";
 
 export function CreateEventForm() {
   const [eventType, setEventType] = useState<string>("match amical");

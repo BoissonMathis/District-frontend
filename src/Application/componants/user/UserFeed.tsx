@@ -1,4 +1,4 @@
-import { useUserConnectedFeed } from "../../../Module/Observable/UserConnectedFeed.observable";
+import { useUserConnectedFeed } from "../../../Module/Observable/userConnected/UserConnectedFeed.observable";
 import { PostComponant } from "../post/Post";
 
 export function UserFeed() {

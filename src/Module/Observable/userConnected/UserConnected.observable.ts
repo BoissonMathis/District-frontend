@@ -1,10 +1,10 @@
 import { BehaviorSubject } from "rxjs";
-import { User } from "../../Infrastructure/User.ts/User.type";
-import { AxiosService } from "../../Infrastructure/Http/axios.service";
+import { User } from "../../../Infrastructure/User.ts/User.type";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 import { resetUserToken, setUserToken, Token } from "./UserToken.observable";
 import { useEffect, useState } from "react";
-import { setError } from "./Errors.observable";
-import { setUpdateFormUser } from "./modal/UpdateFormUser.observable";
+import { setError } from "../Errors.observable";
+import { setUpdateFormUser } from "../modal/UpdateFormUser.observable";
 import { getUserConnectedPosts, resetUserConnectedPosts } from "./UserConnectedPosts.observable";
 import { getUserConnectedComments, resetUserConnectedComments } from "./UserConnectedComments.observable";
 import { getUserConnectedEvents, resetUserConnectedEvents } from "./UserConnectedEvent.observable";

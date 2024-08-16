@@ -9,7 +9,7 @@ import {
 import {
   postLogoutUser,
   useUserConnected,
-} from "../../../Module/Observable/UserConnected.observable";
+} from "../../../Module/Observable/userConnected/UserConnected.observable";
 
 export function UserNav() {
   const user = useUserConnected();

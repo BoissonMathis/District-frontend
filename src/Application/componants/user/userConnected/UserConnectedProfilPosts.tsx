@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import {
   Post,
   useUserConnectedPosts,
-} from "../../../../Module/Observable/UserConnectedPosts.observable";
+} from "../../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import { PostComponant } from "../../post/Post";
 
-export function UserProfilPosts() {
+export function UserConnectedProfilPosts() {
   const [displayPosts, setDisplayPosts] = useState<Post[]>([]);
   const UserConnectedPosts = useUserConnectedPosts();
 

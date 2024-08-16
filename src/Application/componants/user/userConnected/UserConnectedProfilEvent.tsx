@@ -4,10 +4,10 @@ import { setEventForm } from "../../../../Module/Observable/modal/EventForm.obse
 import {
   Event,
   useUserConnectedEvents,
-} from "../../../../Module/Observable/UserConnectedEvent.observable";
+} from "../../../../Module/Observable/userConnected/UserConnectedEvent.observable";
 import { EventComponant } from "../../event/Event";
 
-export function UserProfilEvents() {
+export function UserConnectedProfilEvents() {
   const [displayEvents, setDisplayEvents] = useState<Event[]>([]);
   const UserConnectedEvents = useUserConnectedEvents();
 

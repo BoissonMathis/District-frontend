@@ -1,5 +1,5 @@
-import { Event } from '../../Module/Observable/UserConnectedEvent.observable'
-import { Token } from '../../Module/Observable/UserToken.observable'
+import { Event } from '../../Module/Observable/userConnected/UserConnectedEvent.observable'
+import { Token } from '../../Module/Observable/userConnected/UserToken.observable'
 import { http } from './axios.instance'
 
 export class AxiosService {
@@ -140,6 +140,23 @@ export class AxiosService {
         }catch(error){
             console.log("ERROR =>", error)
             throw(error)
+        }
+    }
+
+    //follow
+    static followUser = async (user_id: string, user_follow_id: string, valid_token: Token) => {
+        try{
+
+        }catch(error){
+
+        }
+    }
+
+    static unfollowUser = async (user_id: string, user_unfollow_id: string, valid_token: Token) => {
+        try{
+
+        }catch(error){
+            
         }
     }
 }
