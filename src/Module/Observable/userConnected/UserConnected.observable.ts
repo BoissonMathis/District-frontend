@@ -9,7 +9,6 @@ import { getUserConnectedPosts, resetUserConnectedPosts } from "./UserConnectedP
 import { getUserConnectedComments, resetUserConnectedComments } from "./UserConnectedComments.observable";
 import { getUserConnectedEvents, resetUserConnectedEvents } from "./UserConnectedEvent.observable";
 import { getUserConnectedFeed } from "./UserConnectedFeed.observable";
-import { Navigate, useNavigate } from "react-router-dom";
 
 let initialValue: User = {
     _id: '',

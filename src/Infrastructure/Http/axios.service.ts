@@ -46,6 +46,16 @@ export class AxiosService {
         }
     }
 
+    static getUsersByFilter = async (valid_token: Token, page: number, limit: number, search: string) => {
+        try {
+            const response = await http.get(`/users_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token.token}`}, params: {page: page, pageSize: limit, q: search}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
+
     static updateUser = async (user_id: string, valid_token: Token, updateBody: object) => {
         try {
             const response = await http.put(`/user/${user_id}`, updateBody, { headers: {"Authorization" : `Bearer ${valid_token}`} })
@@ -130,6 +140,21 @@ export class AxiosService {
             throw(error)
         }
     }
+
+    static putUserEvent = async (event_id: string, update: Event, valid_token: Token) => {
+        // console.log('Event envoyé :', event)
+        try{
+            const response = await http.put(`/event/${event_id}`, { ...update }, { headers: {"Authorization" : `Bearer ${valid_token}`} })
+            console.log(response)
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+
+    //feed
 
     static getUserConnectedFeed = async (user_id: string, valid_token: Token) => {
         try{

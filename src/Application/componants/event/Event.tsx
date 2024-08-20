@@ -43,7 +43,7 @@ export function EventComponant(props: EventProps) {
         </div>
       ) : (
         <div className="">
-          <span>Erreur lors de la récupération du post</span>
+          <span>Erreur lors de la récupération de l'événement</span>
         </div>
       )}
     </>

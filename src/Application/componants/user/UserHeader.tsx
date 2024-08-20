@@ -12,12 +12,38 @@ import {
   useCurrentPage,
 } from "../../../Module/Observable/CurrentPage.observable";
 import { useUserToken } from "../../../Module/Observable/userConnected/UserToken.observable";
+import { useEffect, useState } from "react";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 
 export function UserHeader() {
+  // const [searchValue, setSearchValue] = useState("");
   const userConnected = useUserConnected();
   const currentPage = useCurrentPage();
   const token = useUserToken();
   const navigate = useNavigate();
+
+  // const handleSearch = async () => {
+  //   console.log("Search", searchValue);
+  //   try {
+  //     const response = await AxiosService.getUsersByFilter(
+  //       token!,
+  //       1,
+  //       5,
+  //       searchValue
+  //     );
+  //     console.log("RESPONSE =>", response);
+  //     // setSearchResult(response.data);
+  //   } catch (error) {
+  //     console.error("ERRORS =>", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   console.log("useEffect triggered with searchValue:", searchValue);
+  //   if (searchValue.trim()) {
+  //     handleSearch();
+  //   }
+  // }, [searchValue]);
 
   return (
     <div>
@@ -36,8 +62,8 @@ export function UserHeader() {
             alt="Photo de profil de l'utilisateur"
             className="user-profil-picture-xl cursor-pointer"
             onClick={() => {
-              navigate(`/profil/${userConnected._id}`),
-                setCurrentPage("profil");
+              navigate(`/profil/${userConnected._id}`);
+              setCurrentPage("profil");
             }}
           />
         </div>
@@ -46,6 +72,8 @@ export function UserHeader() {
             type="text"
             placeholder="Recherche..."
             className="search-bar"
+            // value={searchValue}
+            // onChange={(e) => setSearchValue(e.currentTarget.value)}
           />
         </div>
         <div className="flex gap-8 absolute right-16">
