@@ -4,7 +4,7 @@ import { SignUp } from "../../Application/pages/SignUp";
 import { PasswordForget } from "../../Application/pages/PasswordForget";
 import { ProtectedApp } from "../../Application/pages/App/ProtectedApp"; // Utilisez le composant protégé directement
 import Layout from "../../Application/layout/Layout";
-import UserProfilPage from "../../Application/pages/UserProfil";
+import UserProfilPage from "../../Application/pages/UserProfil/UserProfil";
 import Events from "../../Application/pages/Events";
 import { Settings } from "../../Application/pages/Settings";
 import { PostDetail } from "../../Application/pages/PostDetail";

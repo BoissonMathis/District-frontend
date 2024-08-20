@@ -16,10 +16,8 @@ export class AxiosService {
     }
 
     static postLogout = async (user_id: string, valid_token: Token) => {
-        console.log("postLogout déclecnhé")
         try {
             const response = await http.post(`/logout/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token.token}`} })
-            console.log(response)
             return response
         } catch (error) {
             console.log("ERROR => ", error)
@@ -146,17 +144,61 @@ export class AxiosService {
     //follow
     static followUser = async (user_id: string, user_follow_id: string, valid_token: Token) => {
         try{
-
+            const response = await http.put(`/follow/${user_id}`, null, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { follow_id: user_follow_id}})
+            return response
         }catch(error){
-
+            console.log("ERROR =>", error)
+            throw(error)
         }
     }
 
     static unfollowUser = async (user_id: string, user_unfollow_id: string, valid_token: Token) => {
         try{
-
+            const response = await http.delete(`/unfollow/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { unfollow_id: user_unfollow_id}})
+            return response
         }catch(error){
-            
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static like = async (user_id: string, post_id: string, valid_token: Token) => {
+        try{
+            const response = await http.put(`/like/${user_id}`, null, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { post_id: post_id}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static dislike = async (user_id: string, post_id: string, valid_token: Token) => {
+        try{
+            const response = await http.delete(`/dislike/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { post_id: post_id}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static repost = async (user_id: string, post_id: string, valid_token: Token) => {
+        try{
+            const response = await http.put(`/repost/${user_id}`, null, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { post_id: post_id}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static cancelRepost = async (user_id: string, post_id: string, valid_token: Token) => {
+        try{
+            const response = await http.delete(`/cancelrepost/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { post_id: post_id}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
         }
     }
 }

@@ -3,7 +3,7 @@ import {
   Post,
   useUserConnectedPosts,
 } from "../../../../Module/Observable/userConnected/UserConnectedPosts.observable";
-import { PostComponant } from "../../post/Post";
+import { PostComponent } from "../../post/Post";
 
 export function UserConnectedProfilPosts() {
   const [displayPosts, setDisplayPosts] = useState<Post[]>([]);
@@ -18,7 +18,7 @@ export function UserConnectedProfilPosts() {
   return (
     <div className="flex flex-col gap-4 self-center min-w-[50%]">
       {displayPosts && displayPosts.length > 0 ? (
-        displayPosts.map((post) => <PostComponant key={post._id} post={post} />)
+        displayPosts.map((post) => <PostComponent key={post._id} post={post} />)
       ) : (
         <span>Vous n'avez encore rien posté</span>
       )}

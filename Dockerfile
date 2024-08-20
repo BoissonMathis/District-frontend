@@ -13,8 +13,8 @@ COPY --chown=node:node ./ ./
 COPY --chown=node:node scripts/install-docker.sh /usr/local/bin/
 # give permission to execute the script
 RUN chmod +x /usr/local/bin/install-docker.sh
-# exposer le port 3000 (ouvrir)
-EXPOSE 3000
+# exposer le port 3001 (ouvrir)
+EXPOSE 3001
 # run the script to install dependencies after container is up, if only the node_module folder is empty
 ENTRYPOINT ["install-docker.sh"]
 # lancer le projet

@@ -15,18 +15,16 @@ const Auth = <P extends object>(
     var userId = localStorage.getItem("userId");
     var remember_me = localStorage.getItem("remember_me");
 
-    // useEffect(() => {
-    //   console.log("auth délenché");
-    //   if (user && user._id == "") {
-    //     if (token && userId) {
-    //       authUser(userId, { token: token });
-    //     } else {
-    //       navigate("/login");
-    //     }
-    //   } else {
-    //     navigate("/login");
-    //   }
-    // }, [token, userId]);
+    useEffect(() => {
+      console.log("auth délenché");
+      if (user && user._id == "") {
+        if (token && userId) {
+          authUser(userId, { token: token });
+        } else {
+          navigate("/login");
+        }
+      }
+    }, [token, userId, user]);
 
     return <WrappedComponent {...props} />;
   };

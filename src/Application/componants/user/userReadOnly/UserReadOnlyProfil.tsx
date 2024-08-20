@@ -1,10 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrownLine } from "../../BrownLine";
 import { UserProfilSections } from "../UserProfilSections";
 import {
   getUserReadOnly,
   useUserReadOnly,
 } from "../../../../Module/Observable/userReadOnly/UserReadOnly.observable";
+import {
+  unfollow,
+  follow,
+  useUserConnected,
+} from "../../../../Module/Observable/userConnected/UserConnected.observable";
 // import { User } from "../../../../Infrastructure/User.ts/User.type";
 
 type UserReadOnlyProps = {
@@ -12,15 +17,26 @@ type UserReadOnlyProps = {
 };
 
 export function UserReadOnlyProfil(props: UserReadOnlyProps) {
+  const [followed, setFollowed] = useState<boolean>(false);
   let userReadOnlyId = props.userReadOnlyId;
   let userConnectedToken = localStorage.token;
   let userReadOnly = useUserReadOnly();
+  let userConnected = useUserConnected();
 
   useEffect(() => {
     if (userConnectedToken && userReadOnlyId) {
       getUserReadOnly(userReadOnlyId, { token: userConnectedToken });
     }
   }, []);
+
+  useEffect(() => {
+    console.log(userConnected.follows);
+    if (userConnected.follows.includes(userReadOnlyId)) {
+      setFollowed(true);
+    } else {
+      setFollowed(false);
+    }
+  }, [userConnected]);
 
   if (userReadOnly._id == "") {
     return <div>Chargement en cours...</div>;
@@ -55,6 +71,28 @@ export function UserReadOnlyProfil(props: UserReadOnlyProps) {
       </div>
       <div className="flex justify-between">
         <span className="pl-6">{userReadOnly.bio}</span>
+        <button
+          onClick={
+            followed
+              ? () =>
+                  unfollow(
+                    userConnected._id,
+                    userReadOnly._id,
+                    userConnectedToken
+                  )
+              : () =>
+                  follow(
+                    userConnected._id,
+                    userReadOnly._id,
+                    userConnectedToken
+                  )
+          }
+          className={`user-profil-button m-6 ${
+            followed ? "b-brown" : "b-soft-brown"
+          }`}
+        >
+          {followed ? "suivi(e)" : "suivre"}
+        </button>
       </div>
       <BrownLine />
       <div>

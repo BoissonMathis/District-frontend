@@ -23,7 +23,6 @@ let userReadOnly: User = initialValue;
 export const userReadOnly$ = new BehaviorSubject(userReadOnly)
 
 export const setUserReadOnly = async (user: User) => {
-    console.log('ICIIIIIIII', user)
     userReadOnly = user
     return userReadOnly$.next(userReadOnly)
 }

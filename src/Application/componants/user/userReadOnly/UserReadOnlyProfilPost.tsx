@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Post } from "../../../../Module/Observable/userConnected/UserConnectedPosts.observable";
-import { PostComponant } from "../../post/Post";
+import { PostComponent } from "../../post/Post";
 import {
   resetUserReadOnlyPosts,
   useUserReadOnlyPosts,
@@ -24,7 +24,7 @@ export function UserReadOnlyProfilPosts() {
       {displayPosts && displayPosts.length > 0 ? (
         <div className="flex flex-col gap-4 self-center min-w-[50%]">
           {displayPosts.map((post) => (
-            <PostComponant key={post._id} post={post} />
+            <PostComponent key={post._id} post={post} />
           ))}
         </div>
       ) : (

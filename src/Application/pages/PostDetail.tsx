@@ -7,9 +7,19 @@ import { AxiosService } from "../../Infrastructure/Http/axios.service";
 import { useUserToken } from "../../Module/Observable/userConnected/UserToken.observable";
 import { useEffect, useState } from "react";
 import { Post } from "../../Module/Observable/userConnected/UserConnectedPosts.observable";
+import {
+  cancelrepost,
+  dislike,
+  like,
+  repost,
+} from "../../Module/Observable/userConnected/UserConnected.observable";
 
 export function PostDetail() {
   const [post, setPost] = useState<Post | null>(null);
+  const [userId, setUserId] = useState();
+  const [postReadOnly, setPostReadOnly] = useState<boolean>(false);
+  const [reposted, setReposted] = useState<boolean>(false);
+  const [liked, setLiked] = useState<boolean>(false);
   const token = useUserToken();
   const { id } = useParams<{ id: string }>();
 
@@ -26,9 +36,36 @@ export function PostDetail() {
     }
   };
 
+  const handleRepostClick = () => {
+    if (reposted) {
+      cancelrepost(userId!, post!._id, token!);
+    } else {
+      repost(userId!, post!._id, token!);
+    }
+    setReposted(!reposted);
+  };
+
+  const handleLikeClick = () => {
+    if (liked) {
+      dislike(userId!, post!._id, token!);
+    } else {
+      like(userId!, post!._id, token!);
+    }
+    setLiked(!liked);
+  };
+
+  useEffect(() => {
+    if (post && post.user._id !== userId!) {
+      setPostReadOnly(true);
+      post.like.includes(userId!!!) && setLiked(true);
+      post.repost.includes(userId!!!) && setReposted(true);
+    }
+  }, [post]);
+
   useEffect(() => {
     getPostToDisplay();
-  }, [token, id]);
+    setUserId(localStorage.userId);
+  }, [token, id, localStorage]);
 
   return (
     <div className="w-full">
@@ -53,13 +90,25 @@ export function PostDetail() {
                 <FaCommentAlt />
                 <span>{post.comments ? post.comments.length : 0}</span>
               </div>
-              <div className="flex flex-col items-center">
+              <div
+                className={`flex flex-col items-center${
+                  postReadOnly && " cursor-pointer"
+                }${postReadOnly && liked ? " c-brown" : ""}`}
+                onClick={postReadOnly ? handleLikeClick : undefined}
+              >
                 <IoFootball />
-                <span>{post.like.length}</span>
+                <span>{liked ? post.like.length + 1 : post.like.length}</span>
               </div>
-              <div className="flex flex-col items-center">
+              <div
+                className={`flex flex-col items-center${
+                  postReadOnly && " cursor-pointer"
+                }${postReadOnly && reposted ? " c-brown" : ""}`}
+                onClick={postReadOnly ? handleRepostClick : undefined}
+              >
                 <BiRepost />
-                <span>{post.repost.length}</span>
+                <span>
+                  {reposted ? post.repost.length + 1 : post.repost.length}
+                </span>
               </div>
             </div>
           </div>

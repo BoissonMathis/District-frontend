@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Event } from "../../../../Module/Observable/UserConnectedEvent.observable";
-import { User } from "../../../../Infrastructure/User.ts/User.type";
+import { Event } from "../../../Module/Observable/userConnected/UserConnectedEvent.observable";
+import { User } from "../../../Infrastructure/User.ts/User.type";
 
 type EventProps = {
   event: Event;
