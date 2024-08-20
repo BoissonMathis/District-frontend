@@ -1,10 +1,10 @@
 import { MdEdit } from "react-icons/md";
 import { useParams } from "react-router-dom";
-import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { useUserToken } from "../../Module/Observable/userConnected/UserToken.observable";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
+import { useUserToken } from "../../../Module/Observable/userConnected/UserToken.observable";
 import { useEffect, useState } from "react";
-import { Event } from "../../Module/Observable/userConnected/UserConnectedEvent.observable";
-import { User } from "../../Infrastructure/User.ts/User.type";
+import { Event } from "../../../Module/Observable/userConnected/UserConnectedEvent.observable";
+import { User } from "../../../Infrastructure/User.ts/User.type";
 
 export function EventDetail() {
   const [event, setEvent] = useState<Event | null>(null);

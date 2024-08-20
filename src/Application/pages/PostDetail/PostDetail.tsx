@@ -1,18 +1,18 @@
 import { FaCommentAlt } from "react-icons/fa";
 import { IoFootball } from "react-icons/io5";
 import { BiRepost } from "react-icons/bi";
-import { BrownLine } from "../componants/BrownLine";
+import { BrownLine } from "../../componants/BrownLine";
 import { useParams } from "react-router-dom";
-import { AxiosService } from "../../Infrastructure/Http/axios.service";
-import { useUserToken } from "../../Module/Observable/userConnected/UserToken.observable";
+import { AxiosService } from "../../../Infrastructure/Http/axios.service";
+import { useUserToken } from "../../../Module/Observable/userConnected/UserToken.observable";
 import { useEffect, useState } from "react";
-import { Post } from "../../Module/Observable/userConnected/UserConnectedPosts.observable";
+import { Post } from "../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import {
   cancelrepost,
   dislike,
   like,
   repost,
-} from "../../Module/Observable/userConnected/UserConnected.observable";
+} from "../../../Module/Observable/userConnected/UserConnected.observable";
 
 export function PostDetail() {
   const [post, setPost] = useState<Post | null>(null);

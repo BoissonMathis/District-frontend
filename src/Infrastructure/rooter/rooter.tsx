@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import { Login } from "../../Application/pages/Login";
 import { SignUp } from "../../Application/pages/SignUp";
 import { PasswordForget } from "../../Application/pages/PasswordForget";
-import { ProtectedApp } from "../../Application/pages/App/ProtectedApp"; // Utilisez le composant protégé directement
 import Layout from "../../Application/layout/Layout";
-import UserProfilPage from "../../Application/pages/UserProfil/UserProfil";
-import Events from "../../Application/pages/Events";
 import { Settings } from "../../Application/pages/Settings";
-import { PostDetail } from "../../Application/pages/PostDetail";
-import { EventDetail } from "../../Application/pages/EventDetail";
+import { ProtectedApp } from "../../Application/pages/App/ProtectedApp";
+import { ProtectedUserProfil } from "../../Application/pages/UserProfil/ProtectedUserProfil";
+import { ProtectedEvents } from "../../Application/pages/Events/ProtectedEvents";
+import { ProtectedPostDetail } from "../../Application/pages/PostDetail/ProtectedPostDetail";
+import { ProtectedEventDetail } from "../../Application/pages/EventDetail/ProtectedEventDetail";
 
 export const rooter = createBrowserRouter([
   {
@@ -33,11 +33,11 @@ export const rooter = createBrowserRouter([
       },
       {
         path: "/profil/:id",
-        element: <UserProfilPage />,
+        element: <ProtectedUserProfil />,
       },
       {
         path: "/events",
-        element: <Events />,
+        element: <ProtectedEvents />,
       },
       {
         path: "/settings",
@@ -45,11 +45,11 @@ export const rooter = createBrowserRouter([
       },
       {
         path: "/post/:id",
-        element: <PostDetail />,
+        element: <ProtectedPostDetail />,
       },
       {
         path: "/evenement/:id",
-        element: <EventDetail />,
+        element: <ProtectedEventDetail />,
       },
     ],
   },

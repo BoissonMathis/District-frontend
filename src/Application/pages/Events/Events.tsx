@@ -1,4 +1,4 @@
-import Auth from "../../Module/auth";
+import Auth from "../../../Module/auth";
 
 const Events = () => {
   return (
