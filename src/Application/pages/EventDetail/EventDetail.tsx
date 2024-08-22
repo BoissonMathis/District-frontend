@@ -37,7 +37,7 @@ export function EventDetail() {
 
   useEffect(() => {
     getEventToDisplay();
-  }, [token, id]);
+  }, [token, id, updateFormOpened]);
 
   return (
     <div className="flex-1">

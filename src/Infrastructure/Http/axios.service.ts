@@ -46,9 +46,9 @@ export class AxiosService {
         }
     }
 
-    static getUsersByFilter = async (valid_token: Token, page: number, limit: number, search: string) => {
+    static getUsersByFilter = async (valid_token: string, page: number, limit: number, search: string) => {
         try {
-            const response = await http.get(`/users_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token.token}`}, params: {page: page, pageSize: limit, q: search}})
+            const response = await http.get(`/users_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {page: page, pageSize: limit, q: search}})
             return response
         }catch(error){
             console.log("ERROR =>", error)

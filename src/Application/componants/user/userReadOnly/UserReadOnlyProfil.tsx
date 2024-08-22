@@ -10,6 +10,7 @@ import {
   follow,
   useUserConnected,
 } from "../../../../Module/Observable/userConnected/UserConnected.observable";
+import { useParams } from "react-router-dom";
 // import { User } from "../../../../Infrastructure/User.ts/User.type";
 
 type UserReadOnlyProps = {
@@ -18,25 +19,26 @@ type UserReadOnlyProps = {
 
 export function UserReadOnlyProfil(props: UserReadOnlyProps) {
   const [followed, setFollowed] = useState<boolean>(false);
+  const { id } = useParams<{ id: string }>();
   let userReadOnlyId = props.userReadOnlyId;
   let userConnectedToken = localStorage.token;
   let userReadOnly = useUserReadOnly();
   let userConnected = useUserConnected();
 
   useEffect(() => {
-    if (userConnectedToken && userReadOnlyId) {
-      getUserReadOnly(userReadOnlyId, { token: userConnectedToken });
+    if (userConnectedToken && userReadOnlyId && id) {
+      getUserReadOnly(id, { token: userConnectedToken });
+      console.log(userReadOnly);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
-    console.log(userConnected.follows);
     if (userConnected.follows.includes(userReadOnlyId)) {
       setFollowed(true);
     } else {
       setFollowed(false);
     }
-  }, [userConnected]);
+  }, [userConnected, id]);
 
   if (userReadOnly._id == "") {
     return <div>Chargement en cours...</div>;
