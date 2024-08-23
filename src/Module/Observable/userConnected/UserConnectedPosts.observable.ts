@@ -72,3 +72,17 @@ export const getUserConnectedPosts = async (user_id: string, valid_token: Token,
         console.log('ERROR:', e)
     }
 }
+
+export const deleteOneUserPost = async (post_id: string, valid_token: Token) => {
+    try{
+        const response = await AxiosService.deleteOnePostById(post_id, valid_token)
+        console.log(response)
+        if(response.status == 200 && response.data){
+            const updatedPosts = userConnectedPosts.posts.filter(post => post._id !== post_id);
+            userConnectedPosts.posts = [...updatedPosts];
+            userConnectedPosts$.next({ ...userConnectedPosts, posts: updatedPosts });
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}

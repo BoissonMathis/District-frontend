@@ -97,6 +97,16 @@ export class AxiosService {
         }
     }
 
+    static deleteOnePostById = async (post_id: string, valid_token: Token) => {
+        try{
+            const response = await http.delete(`/post/${post_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true}  })
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
+
     //comments
     static getManyUserComments = async (user_id: string, valid_token: Token, page: number) => {
         try{

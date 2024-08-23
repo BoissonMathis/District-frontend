@@ -10,6 +10,7 @@ export function UserConnectedProfilPosts() {
   const UserConnectedPosts = useUserConnectedPosts();
 
   useEffect(() => {
+    console.log("ok");
     UserConnectedPosts
       ? setDisplayPosts(UserConnectedPosts?.posts)
       : setDisplayPosts([]);

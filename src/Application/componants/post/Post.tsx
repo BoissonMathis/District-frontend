@@ -1,4 +1,7 @@
-import { Post } from "../../../Module/Observable/userConnected/UserConnectedPosts.observable";
+import {
+  deleteOneUserPost,
+  Post,
+} from "../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import { FaCommentAlt } from "react-icons/fa";
 import { IoFootball } from "react-icons/io5";
 import { BiRepost } from "react-icons/bi";
@@ -50,11 +53,8 @@ export function PostComponent(props: PostProps) {
     if (localStorage.token && localStorage.userId) {
       setUserId(localStorage.userId);
       AxiosService.getOnePostById(props.post._id, token!).then((res) => {
-        // console.log(res);
-        // console.log("post1:", post);
         if (res.status === 200) {
           setPost(res.data);
-          // console.log("post2:", post);
           setUser(res.data.user);
           setLiked(res.data.like.includes(localStorage.userId));
           setReposted(res.data.repost.includes(localStorage.userId));
@@ -91,6 +91,16 @@ export function PostComponent(props: PostProps) {
         <span>
           {user!.username} - {user!.status}
         </span>
+        {!postReadOnly && (
+          <span
+            onClick={() => {
+              post.user._id == localStorage.userId &&
+                deleteOneUserPost(post._id, token);
+            }}
+          >
+            DELETE
+          </span>
+        )}
       </div>
       <div
         className="pl-8 pr-8 cursor-pointer"
