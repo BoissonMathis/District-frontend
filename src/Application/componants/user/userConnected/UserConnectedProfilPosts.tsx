@@ -20,7 +20,9 @@ export function UserConnectedProfilPosts() {
       {displayPosts && displayPosts.length > 0 ? (
         displayPosts.map((post) => <PostComponent key={post._id} post={post} />)
       ) : (
-        <span>Vous n'avez encore rien posté</span>
+        <span className="flex justify-center">
+          Vous n'avez encore rien posté
+        </span>
       )}
     </div>
   );

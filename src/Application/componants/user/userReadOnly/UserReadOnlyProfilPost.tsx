@@ -44,7 +44,7 @@ export function UserReadOnlyProfilPosts() {
           ))}
         </div>
       ) : (
-        <div className="flex self-center pb-8">
+        <div className="flex justify-center pb-8">
           <span>Aucun post</span>
         </div>
       )}
