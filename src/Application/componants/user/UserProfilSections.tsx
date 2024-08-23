@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserConnectedProfilPosts } from "./userConnected/UserConnectedProfilPosts";
 import { UserConnectedProfilComments } from "./userConnected/UserConnectedProfilComments";
 import { UserConnectedProfilEvents } from "./userConnected/UserConnectedProfilEvent";
@@ -13,6 +13,7 @@ type userConnected = {
 export function UserProfilSections(props: userConnected) {
   const userConnected = props.userConnected;
   const [currentSection, setCurrentSection] = useState<string>("posts");
+
   return (
     <div className="flex flex-col">
       <div className="flex gap-32 justify-center pt-6 pb-8">

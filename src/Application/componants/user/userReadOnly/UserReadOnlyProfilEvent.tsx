@@ -2,22 +2,39 @@ import { useEffect, useState } from "react";
 import { Event } from "../../../../Module/Observable/userConnected/UserConnectedEvent.observable";
 import { EventComponant } from "../../event/Event";
 import {
+  getUserReadOnlyEvents,
   resetUserReadOnlyEvents,
+  setUserReadOnlyEvents,
   useUserReadOnlyEvents,
 } from "../../../../Module/Observable/userReadOnly/UserReadOnlyEvents.observable";
+import { useUserReadOnly } from "../../../../Module/Observable/userReadOnly/UserReadOnly.observable";
+import { useUserToken } from "../../../../Module/Observable/userConnected/UserToken.observable";
 
 export function UserReadOnlyProfilEvents() {
   const [displayEvents, setDisplayEvents] = useState<Event[]>([]);
   const userReadOnlyEvents = useUserReadOnlyEvents();
+  const userReadOnly = useUserReadOnly();
+  const token = useUserToken();
+
+  useEffect(() => {
+    if (userReadOnly && token) {
+      getUserReadOnlyEvents(userReadOnly._id, token!, 1);
+    } else {
+      resetUserReadOnlyEvents();
+    }
+  }, [userReadOnly, token]);
 
   useEffect(() => {
     userReadOnlyEvents
       ? setDisplayEvents(userReadOnlyEvents?.events)
       : setDisplayEvents([]);
+  }, [userReadOnlyEvents]);
+
+  useEffect(() => {
     return () => {
       resetUserReadOnlyEvents();
     };
-  }, [userReadOnlyEvents]);
+  }, []);
 
   return (
     <>

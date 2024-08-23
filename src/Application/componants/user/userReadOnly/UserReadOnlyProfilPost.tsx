@@ -2,22 +2,38 @@ import { useEffect, useState } from "react";
 import { Post } from "../../../../Module/Observable/userConnected/UserConnectedPosts.observable";
 import { PostComponent } from "../../post/Post";
 import {
+  getUserReadOnlyPosts,
   resetUserReadOnlyPosts,
   useUserReadOnlyPosts,
 } from "../../../../Module/Observable/userReadOnly/UserReadOnlyPosts.observable";
+import { useUserReadOnly } from "../../../../Module/Observable/userReadOnly/UserReadOnly.observable";
+import { useUserToken } from "../../../../Module/Observable/userConnected/UserToken.observable";
 
 export function UserReadOnlyProfilPosts() {
   const [displayPosts, setDisplayPosts] = useState<Post[]>([]);
   const UserReadOnlyPosts = useUserReadOnlyPosts();
+  const userReadOnly = useUserReadOnly();
+  const token = useUserToken();
+
+  useEffect(() => {
+    if (userReadOnly && token) {
+      getUserReadOnlyPosts(userReadOnly._id, token!, 1);
+    } else {
+      resetUserReadOnlyPosts();
+    }
+  }, [userReadOnly, token]);
 
   useEffect(() => {
     UserReadOnlyPosts
       ? setDisplayPosts(UserReadOnlyPosts?.posts)
       : setDisplayPosts([]);
+  }, [UserReadOnlyPosts]);
+
+  useEffect(() => {
     return () => {
       resetUserReadOnlyPosts();
     };
-  }, [UserReadOnlyPosts]);
+  }, []);
 
   return (
     <>

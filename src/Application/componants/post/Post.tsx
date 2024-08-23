@@ -50,11 +50,11 @@ export function PostComponent(props: PostProps) {
     if (localStorage.token && localStorage.userId) {
       setUserId(localStorage.userId);
       AxiosService.getOnePostById(props.post._id, token!).then((res) => {
-        console.log(res);
-        console.log("post1:", post);
+        // console.log(res);
+        // console.log("post1:", post);
         if (res.status === 200) {
           setPost(res.data);
-          console.log("post2:", post);
+          // console.log("post2:", post);
           setUser(res.data.user);
           setLiked(res.data.like.includes(localStorage.userId));
           setReposted(res.data.repost.includes(localStorage.userId));

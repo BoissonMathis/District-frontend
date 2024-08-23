@@ -52,10 +52,12 @@ export const useUserReadOnlyComments = () => {
 }
 
 export const getUserReadOnlyComments = async (user_id: string, valid_token: Token, page: number) => {
+    console.log('OUAISSSSSSSSSSSSSSSSSSSSSSS', valid_token)
     try {
         const response = await AxiosService.getManyUserComments(user_id, valid_token, page)
         // console.log("Comments récupérée avec succès :", response)
         if(response.status == 200 && response.data){
+            console.log('récupération des commentaires ok')
             let newComments = {count: response.data.count, page: response.data.page, comments: response.data.results}
             setUserReadOnlyComments(newComments)
         }
