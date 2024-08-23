@@ -111,7 +111,18 @@ export class AxiosService {
     //events
     static getManyUserEvents = async (user_id: string, valid_token: Token, page: number) => {
         try {
-            const response = await http.get(`/events_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: user_id, page: page, pageSize: 5, field: 'user', populate: true} })
+            const response = await http.get(`/events_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {user: user_id, page: page, pageSize: 5, populate: true} })
+            // console.log('Appel récupération events :', response)
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
+
+    static getManyEvents = async (valid_token: Token, page: number, search: any) => {
+        try {
+            const response = await http.get(`/events_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {page: page, pageSize: 5, type: search.type, level: search.level, categorie: search.categorie, user: search.user, populate: true} })
             // console.log('Appel récupération events :', response)
             return response
         }catch(error){
@@ -153,9 +164,7 @@ export class AxiosService {
         }
     }
 
-
     //feed
-
     static getUserConnectedFeed = async (user_id: string, valid_token: Token) => {
         try{
             const response = await http.get(`/feed/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true}})
