@@ -118,6 +118,26 @@ export class AxiosService {
         }
     }
 
+    static getManyPostComments = async (post_id: string, valid_token: Token, page: number) => {
+        try{
+            const response = await http.get(`/comments_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: post_id, page: page, pageSize: 5, field: 'post', populate: true} })
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
+
+    static postOneComment = async (user_id: string, post_id: string, valid_token: Token, contentText: string) => {
+        try{
+            const response = await http.post("/comment", {user: user_id, post: post_id, contentText: contentText}, { headers: {"Authorization" : `Bearer ${valid_token}`}})
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
+
     //events
     static getManyUserEvents = async (user_id: string, valid_token: Token, page: number) => {
         try {

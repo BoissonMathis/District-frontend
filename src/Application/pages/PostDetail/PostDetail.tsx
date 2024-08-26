@@ -12,23 +12,29 @@ import {
   dislike,
   like,
   repost,
+  useUserConnected,
 } from "../../../Module/Observable/userConnected/UserConnected.observable";
+import { PostDetailComment } from "./PostDetailComment";
 
 export function PostDetail() {
+  const { id } = useParams<{ id: string }>();
+  const user = useUserConnected();
+  const token = useUserToken();
   const [post, setPost] = useState<Post | null>(null);
-  const [userId, setUserId] = useState();
-  const [postReadOnly, setPostReadOnly] = useState<boolean>(false);
   const [reposted, setReposted] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
-  const token = useUserToken();
-  const { id } = useParams<{ id: string }>();
+
+  const postReadOnly = post && post.user._id !== user._id;
 
   const getPostToDisplay = async () => {
     if (token && id) {
       try {
         const response = await AxiosService.getOnePostById(id, token);
         if (response.status === 200) {
-          setPost(response.data);
+          const fetchedPost = response.data;
+          setPost(fetchedPost);
+          setLiked(fetchedPost.like.includes(user._id));
+          setReposted(fetchedPost.repost.includes(user._id));
         }
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -36,36 +42,39 @@ export function PostDetail() {
     }
   };
 
-  const handleRepostClick = () => {
-    if (reposted) {
-      cancelrepost(userId!, post!._id, token!);
-    } else {
-      repost(userId!, post!._id, token!);
+  const handleRepostClick = async () => {
+    if (post) {
+      try {
+        if (reposted) {
+          await cancelrepost(user._id!, post._id, token!);
+        } else {
+          await repost(user._id!, post._id, token!);
+        }
+        await getPostToDisplay();
+      } catch (error) {
+        console.error("Error handling repost:", error);
+      }
     }
-    setReposted(!reposted);
   };
 
-  const handleLikeClick = () => {
-    if (liked) {
-      dislike(userId!, post!._id, token!);
-    } else {
-      like(userId!, post!._id, token!);
+  const handleLikeClick = async () => {
+    if (post) {
+      try {
+        if (liked) {
+          await dislike(user._id!, post._id, token!);
+        } else {
+          await like(user._id!, post._id, token!);
+        }
+        await getPostToDisplay();
+      } catch (error) {
+        console.error("Error handling like:", error);
+      }
     }
-    setLiked(!liked);
   };
-
-  useEffect(() => {
-    if (post && post.user._id !== userId!) {
-      setPostReadOnly(true);
-      post.like.includes(userId!!!) && setLiked(true);
-      post.repost.includes(userId!!!) && setReposted(true);
-    }
-  }, [post]);
 
   useEffect(() => {
     getPostToDisplay();
-    setUserId(localStorage.userId);
-  }, [token, id, localStorage]);
+  }, [token, id]);
 
   return (
     <div className="w-full">
@@ -91,24 +100,22 @@ export function PostDetail() {
                 <span>{post.comments ? post.comments.length : 0}</span>
               </div>
               <div
-                className={`flex flex-col items-center${
-                  postReadOnly && " cursor-pointer"
-                }${postReadOnly && liked ? " c-brown" : ""}`}
+                className={`flex flex-col items-center ${
+                  postReadOnly ? "cursor-pointer" : ""
+                } ${liked ? "c-brown" : ""}`}
                 onClick={postReadOnly ? handleLikeClick : undefined}
               >
                 <IoFootball />
-                <span>{liked ? post.like.length + 1 : post.like.length}</span>
+                <span>{post.like.length}</span>
               </div>
               <div
-                className={`flex flex-col items-center${
-                  postReadOnly && " cursor-pointer"
-                }${postReadOnly && reposted ? " c-brown" : ""}`}
+                className={`flex flex-col items-center ${
+                  postReadOnly ? "cursor-pointer" : ""
+                } ${reposted ? "c-brown" : ""}`}
                 onClick={postReadOnly ? handleRepostClick : undefined}
               >
                 <BiRepost />
-                <span>
-                  {reposted ? post.repost.length + 1 : post.repost.length}
-                </span>
+                <span>{post.repost.length}</span>
               </div>
             </div>
           </div>
@@ -117,13 +124,7 @@ export function PostDetail() {
         )}
       </div>
       <BrownLine />
-      <div className="flex justify-center">
-        {post && post.comments && post.comments.length > 0 ? (
-          <p>{post.comments.length}</p>
-        ) : (
-          <span className="pt-8">Aucun commentaire</span>
-        )}
-      </div>
+      <PostDetailComment post_id={id!} />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import {
 } from "../../../Module/Observable/userConnected/UserConnected.observable";
 import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 import { User } from "../../../Infrastructure/User.ts/User.type";
+import { CommentModal } from "../comment/CommentModal";
 
 type PostProps = {
   post: Post;
@@ -28,6 +29,7 @@ export function PostComponent(props: PostProps) {
   const [postReadOnly, setPostReadOnly] = useState<boolean>(false);
   const [reposted, setReposted] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
+  const [commentModal, setCommentModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const token = localStorage.token;
 
@@ -109,7 +111,10 @@ export function PostComponent(props: PostProps) {
         <span>{post!.contentText}</span>
       </div>
       <div className="flex gap-16 justify-center">
-        <div className="flex flex-col items-center">
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => setCommentModal(!commentModal)}
+        >
           <FaCommentAlt />
           <span>{post!.comments ? post!.comments.length : 0}</span>
         </div>
@@ -132,6 +137,7 @@ export function PostComponent(props: PostProps) {
           <span>{post!.repost.length}</span>
         </div>
       </div>
+      {commentModal && <CommentModal user_id={userId!} post_id={post._id} />}
       <BrownLine />
     </div>
   );
