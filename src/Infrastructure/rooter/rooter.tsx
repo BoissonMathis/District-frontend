@@ -9,6 +9,7 @@ import { ProtectedUserProfil } from "../../Application/pages/UserProfil/Protecte
 import { ProtectedEvents } from "../../Application/pages/Events/ProtectedEvents";
 import { ProtectedPostDetail } from "../../Application/pages/PostDetail/ProtectedPostDetail";
 import { ProtectedEventDetail } from "../../Application/pages/EventDetail/ProtectedEventDetail";
+import { ProtectedCommentDetail } from "../../Application/pages/CommentDetail/ProtectedCommentDetail";
 
 export const rooter = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const rooter = createBrowserRouter([
       {
         path: "/post/:id",
         element: <ProtectedPostDetail />,
+      },
+      {
+        path: "/post/comment/:id",
+        element: <ProtectedCommentDetail />,
       },
       {
         path: "/evenement/:id",

@@ -108,6 +108,16 @@ export class AxiosService {
     }
 
     //comments
+    static getOneCommentById = async (comment_id: string, valid_token: Token) => {
+        try{
+            const response = await http.get(`/comment/${comment_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true} })
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw error
+        }
+    }
+
     static getManyUserComments = async (user_id: string, valid_token: Token, page: number) => {
         try{
             const response = await http.get(`/comments_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: user_id, page: page, pageSize: 5, field: 'user', populate: true} })
@@ -118,9 +128,9 @@ export class AxiosService {
         }
     }
 
-    static getManyPostComments = async (post_id: string, valid_token: Token, page: number) => {
+    static getManyComments = async (post_id: string, valid_token: Token, page: number, field: string) => {
         try{
-            const response = await http.get(`/comments_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: post_id, page: page, pageSize: 5, field: 'post', populate: true} })
+            const response = await http.get(`/comments_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: post_id, page: page, pageSize: 5, field: field, populate: true} })
             return response
         }catch(error){
             console.log("ERROR =>", error)
