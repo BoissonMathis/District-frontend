@@ -128,9 +128,9 @@ export class AxiosService {
         }
     }
 
-    static getManyComments = async (post_id: string, valid_token: Token, page: number, field: string) => {
+    static getManyComments = async (id: string, valid_token: Token, page: number, field: string) => {
         try{
-            const response = await http.get(`/comments_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: post_id, page: page, pageSize: 5, field: field, populate: true} })
+            const response = await http.get(`/comments_by_filters`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {q: id, page: page, pageSize: 5, field: field, populate: true} })
             return response
         }catch(error){
             console.log("ERROR =>", error)
@@ -236,9 +236,9 @@ export class AxiosService {
         }
     }
 
-    static like = async (user_id: string, post_id: string, valid_token: Token) => {
+    static like = async (user_id: string, item_id: string, type: string, valid_token: Token) => {
         try{
-            const response = await http.put(`/like/${user_id}`, null, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { post_id: post_id}})
+            const response = await http.put(`/like/${user_id}`, null, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { item_id: item_id, type: type }})
             return response
         }catch(error){
             console.log("ERROR =>", error)
@@ -246,9 +246,9 @@ export class AxiosService {
         }
     }
 
-    static dislike = async (user_id: string, post_id: string, valid_token: Token) => {
+    static dislike = async (user_id: string, item_id: string, type: string, valid_token: Token) => {
         try{
-            const response = await http.delete(`/dislike/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { post_id: post_id}})
+            const response = await http.delete(`/dislike/${user_id}`, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: { item_id: item_id, type: type }})
             return response
         }catch(error){
             console.log("ERROR =>", error)

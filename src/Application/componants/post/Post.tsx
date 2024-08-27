@@ -17,6 +17,7 @@ import {
 import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 import { User } from "../../../Infrastructure/User.ts/User.type";
 import { CommentModal } from "../comment/CommentModal";
+import { CommentsInfo } from "../../../Module/Observable/userConnected/UserConnectedComments.observable";
 
 type PostProps = {
   post: Post;
@@ -29,9 +30,39 @@ export function PostComponent(props: PostProps) {
   const [postReadOnly, setPostReadOnly] = useState<boolean>(false);
   const [reposted, setReposted] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
+  const [commented, setCommented] = useState<boolean>(false);
+  const [comments, setComments] = useState<CommentsInfo>();
   const [commentModal, setCommentModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const token = localStorage.token;
+
+  console.log("reload");
+
+  const getComments = async () => {
+    if (token && post && post._id) {
+      try {
+        const response = await AxiosService.getManyComments(
+          post._id,
+          token,
+          1,
+          "post"
+        );
+        console.log("Récupération des commentaires du post", response);
+        if (response.status === 200) {
+          const update = {
+            count: response.data.count,
+            page: response.data.page,
+            comments: [...response.data.results],
+          };
+          setComments(update);
+          comments?.comments?.some((comment) => comment.user._id === userId) &&
+            setCommented(true);
+        }
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      }
+    }
+  };
 
   const handleRepostClick = async () => {
     if (reposted) {
@@ -44,9 +75,9 @@ export function PostComponent(props: PostProps) {
 
   const handleLikeClick = async () => {
     if (liked) {
-      await dislike(userId!, post!._id, token!);
+      await dislike(userId!, post!._id, "post", token!);
     } else {
-      await like(userId!, post!._id, token!);
+      await like(userId!, post!._id, "post", token!);
     }
     setLiked((prevLiked) => !prevLiked);
   };
@@ -60,6 +91,7 @@ export function PostComponent(props: PostProps) {
           setUser(res.data.user);
           setLiked(res.data.like.includes(localStorage.userId));
           setReposted(res.data.repost.includes(localStorage.userId));
+          getComments();
         }
       });
     }
@@ -112,11 +144,13 @@ export function PostComponent(props: PostProps) {
       </div>
       <div className="flex gap-16 justify-center">
         <div
-          className="flex flex-col items-center cursor-pointer"
+          className={`flex flex-col items-center cursor-pointer ${
+            postReadOnly && commented ? " c-brown " : ""
+          }`}
           onClick={() => setCommentModal(!commentModal)}
         >
           <FaCommentAlt />
-          <span>{post!.comments ? post!.comments.length : 0}</span>
+          <span>{comments && comments.count ? comments.count : 0}</span>
         </div>
         <div
           className={`flex flex-col items-center ${
@@ -137,7 +171,13 @@ export function PostComponent(props: PostProps) {
           <span>{post!.repost.length}</span>
         </div>
       </div>
-      {commentModal && <CommentModal user_id={userId!} post_id={post._id} />}
+      {commentModal && (
+        <CommentModal
+          user_id={userId!}
+          post_id={post._id}
+          onSuccess={() => setCommentModal(false)}
+        />
+      )}
       <BrownLine />
     </div>
   );

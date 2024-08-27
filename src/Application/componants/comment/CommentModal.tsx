@@ -6,6 +6,7 @@ type CommentModalProps = {
   post_id: string;
   user_id: string;
   comment_id?: string;
+  onSuccess: () => void;
 };
 
 export function CommentModal(props: CommentModalProps) {
@@ -16,7 +17,7 @@ export function CommentModal(props: CommentModalProps) {
   const token = useUserToken();
 
   const handleCommentPost = async () => {
-    if (contentText != "" && token) {
+    if (contentText !== "" && token) {
       try {
         const response = await AxiosService.postOneComment(
           user_id,
@@ -25,8 +26,9 @@ export function CommentModal(props: CommentModalProps) {
           contentText
         );
         console.log("response comment =>", response);
-        if (response.status == 201) {
-          console.log("ok");
+        if (response.status === 201) {
+          console.log("Commentaire posté avec succès");
+          props.onSuccess();
         }
       } catch (e: any) {
         console.log("ERROR:", e);
@@ -49,7 +51,7 @@ export function CommentModal(props: CommentModalProps) {
           }}
         />
       </div>
-      <button onClick={() => handleCommentPost()}>poster</button>
+      <button onClick={() => handleCommentPost()}>Poster</button>
     </div>
   );
 }

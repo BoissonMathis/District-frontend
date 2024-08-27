@@ -68,9 +68,9 @@ export function CommentDetail() {
     if (comment) {
       try {
         if (liked) {
-          await dislike(user._id!, comment._id, token!);
+          await dislike(user._id!, comment._id, "comment", token!);
         } else {
-          await like(user._id!, comment._id, token!);
+          await like(user._id!, comment._id, "comment", token!);
         }
         await getCommentToDisplay();
       } catch (error) {

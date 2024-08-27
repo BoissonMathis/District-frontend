@@ -7,7 +7,11 @@ import {
 } from "../../../Module/Observable/userConnected/UserConnectedComments.observable";
 import { BrownLine } from "../BrownLine";
 import { FaCommentAlt } from "react-icons/fa";
-import { useUserConnected } from "../../../Module/Observable/userConnected/UserConnected.observable";
+import {
+  dislike,
+  like,
+  useUserConnected,
+} from "../../../Module/Observable/userConnected/UserConnected.observable";
 import { IoFootball } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +27,19 @@ export function DetailCommentSection(props: PostDetailCommentProps) {
   const id = props.id;
   const user = useUserConnected();
   const navigate = useNavigate();
+
+  // const handleLikeClick = async (comment: Comment) => {
+  //   try {
+  //     if (comment.like.includes(user._id)) {
+  //       await dislike(user._id!, post._id, token!);
+  //     } else {
+  //       await like(user._id!, post._id, token!);
+  //     }
+  //     await getPostToDisplay();
+  //   } catch (error) {
+  //     console.error("Error handling like:", error);
+  //   }
+  // };
 
   return (
     <div>

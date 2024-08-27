@@ -172,9 +172,9 @@ export const unfollow = async (user_id: string, user_unfollow_id: string, token:
     }
 }
 
-export const like = async (user_id: string, post_like_id: string, token: Token) => {
+export const like = async (user_id: string, item_id: string, type: string, token: Token) => {
     try {
-        const response = await AxiosService.like(user_id, post_like_id, token)
+        const response = await AxiosService.like(user_id, item_id, type, token)
         console.log(response)
         // if(response.status == 200){
         //     setUserConnected(response.data)
@@ -185,9 +185,9 @@ export const like = async (user_id: string, post_like_id: string, token: Token) 
     }
 }
 
-export const dislike = async (user_id: string, post_dislike_id: string, token: Token) => {
+export const dislike = async (user_id: string, item_id: string, type: string, token: Token) => {
     try {
-        const response = await AxiosService.dislike(user_id, post_dislike_id, token)
+        const response = await AxiosService.dislike(user_id, item_id, type, token)
         console.log(response)
         // if(response.status == 200){
         //     setUserConnected(response.data)

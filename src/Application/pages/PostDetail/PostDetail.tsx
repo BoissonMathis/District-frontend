@@ -25,7 +25,7 @@ export function PostDetail() {
   const [comments, setComments] = useState<CommentsInfo>();
   const [reposted, setReposted] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
-
+  const [commented, setCommented] = useState<boolean>(false);
   const postReadOnly = post && post.user._id !== user._id;
 
   const getPostToDisplay = async () => {
@@ -62,7 +62,9 @@ export function PostDetail() {
             comments: [...response.data.results],
           };
           setComments(update);
-          console.log(comments);
+          comments?.comments?.some(
+            (comment) => comment.user._id === user._id
+          ) && setCommented(true);
         }
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -89,9 +91,9 @@ export function PostDetail() {
     if (post) {
       try {
         if (liked) {
-          await dislike(user._id!, post._id, token!);
+          await dislike(user._id!, post._id, "post", token!);
         } else {
-          await like(user._id!, post._id, token!);
+          await like(user._id!, post._id, "post", token!);
         }
         await getPostToDisplay();
       } catch (error) {
@@ -124,7 +126,11 @@ export function PostDetail() {
               <span>{post.contentText}</span>
             </div>
             <div className="flex gap-16 justify-center">
-              <div className="flex flex-col items-center">
+              <div
+                className={`flex flex-col items-center ${
+                  postReadOnly && commented ? " c-brown " : ""
+                }`}
+              >
                 <FaCommentAlt />
                 <span>{comments?.comments.length}</span>
               </div>
