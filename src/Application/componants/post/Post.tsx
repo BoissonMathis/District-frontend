@@ -36,8 +36,6 @@ export function PostComponent(props: PostProps) {
   const navigate = useNavigate();
   const token = localStorage.token;
 
-  console.log("reload");
-
   const getComments = async () => {
     if (token && post && post._id) {
       try {
@@ -95,12 +93,14 @@ export function PostComponent(props: PostProps) {
         }
       });
     }
+    console.log("a cause de props.post._id, token, liked, reposted");
   }, [props.post._id, token, liked, reposted]);
 
   useEffect(() => {
     if (post && post.user && post.user._id !== userId!) {
       setPostReadOnly(true);
     }
+    console.log("a cause de post || userId");
   }, [post, userId]);
 
   if (!post || !user) {

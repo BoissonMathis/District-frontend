@@ -87,15 +87,15 @@
     }
 
     .user-profil-picture-2xl {
-        @apply h-24 rounded-full object-cover border-2 border-brown
+        @apply h-24 w-24 rounded-full object-cover border-2 border-brown
     }
 
     .user-profil-picture-xl {
-        @apply h-16 rounded-full object-cover border-2 border-brown
+        @apply h-16 w-16 rounded-full object-cover border-2 border-brown
     }
 
     .user-profil-picture-xs {
-        @apply h-8 rounded-full object-cover border-2 border-brown
+        @apply h-8 w-8 rounded-full object-cover border-2 border-brown
     }
 
     .user-banner {

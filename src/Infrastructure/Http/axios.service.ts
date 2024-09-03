@@ -275,4 +275,22 @@ export class AxiosService {
             throw(error)
         }
     }
+
+    static uploadProfileImage = async (user_id: string, file: FormData) => {
+        try{
+            const response = await http.post('/upload/profil_picture', file, {headers: {'Content-Type': 'multipart/form-data'}, params: { user_id: user_id}})
+            return response
+        }catch(error){
+            throw(error)
+        }
+    }
+
+    static uploadBannerImage = async (user_id: string, file: FormData) => {
+        try{
+            const response = await http.post('/upload/banner_picture', file, {headers: {'Content-Type': 'multipart/form-data'}, params: { user_id: user_id}})
+            return response
+        }catch(error){
+            throw(error)
+        }
+    }
 }

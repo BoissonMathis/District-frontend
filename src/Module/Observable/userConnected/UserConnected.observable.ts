@@ -223,3 +223,33 @@ export const cancelrepost = async (user_id: string, post_cancel_repost_id: strin
         console.log('ERROR:', e)
     }
 }
+
+export const uploadProfileImage = async (user_id: string, file: File) => {
+    try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await AxiosService.uploadProfileImage(user_id, formData);
+        console.log(response);
+        if(response.status == 200){
+            setUserConnected(response.data.user)
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}
+
+export const uploadBannerImage = async (user_id: string, file: File) => {
+    try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await AxiosService.uploadBannerImage(user_id, formData);
+        console.log(response);
+        if(response.status == 200){
+            setUserConnected(response.data.user)
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}
