@@ -18,6 +18,7 @@ import { AxiosService } from "../../../Infrastructure/Http/axios.service";
 import { User } from "../../../Infrastructure/User.ts/User.type";
 import { CommentModal } from "../comment/CommentModal";
 import { CommentsInfo } from "../../../Module/Observable/userConnected/UserConnectedComments.observable";
+import { FaTrashCan } from "react-icons/fa6";
 
 type PostProps = {
   post: Post;
@@ -113,29 +114,31 @@ export function PostComponent(props: PostProps) {
 
   return (
     <div className="flex flex-col gap-4 min-w-full b-breige">
-      <div
-        className="flex gap-4 items-center cursor-pointer"
-        onClick={() => navigate(`/profil/${post!.user._id}`)}
-      >
-        <img
-          src={user!.profil_image}
-          alt=""
-          className="user-profil-picture-xs"
-        />
-        <span>
-          {user!.username} - {user!.status}
-        </span>
+      <div className="flex justify-between items-center">
+        <div
+          className="flex gap-4 items-center cursor-pointer"
+          onClick={() => navigate(`/profil/${post!.user._id}`)}
+        >
+          <img
+            src={user!.profil_image}
+            alt=""
+            className="user-profil-picture-xs"
+          />
+          <span>
+            {user!.username} - {user!.status}
+          </span>
+        </div>
         {!postReadOnly && (
-          <span
+          <FaTrashCan
+            className="cursor-pointer"
             onClick={() => {
               post.user._id == localStorage.userId &&
                 deleteOneUserPost(post._id, token);
             }}
-          >
-            DELETE
-          </span>
+          />
         )}
       </div>
+
       <div
         className="pl-8 pr-8 cursor-pointer"
         onClick={() => navigate(`/post/${post!._id}`)}

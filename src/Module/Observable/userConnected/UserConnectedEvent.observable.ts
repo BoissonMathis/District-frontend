@@ -12,7 +12,11 @@ export type Event = {
     categorie?: string,
     level?: string,
     contentText: string,
-    place?: string
+    place?: string,
+    slots: number,
+    candidate: User[],
+    candidate_validate: User[],
+    completed: boolean
 }
 
 export type EventsInfo = {
@@ -81,3 +85,52 @@ export const getUserConnectedEvents = async (user_id: string, valid_token: Token
     }
 }
 
+export const acceptCandidate = async (event_id: string, candidat_id: string, valid_token: string) => {
+    try{
+        const response = await AxiosService.addEventValidateCandidate(event_id, candidat_id, valid_token)
+        console.log(response)
+        console.log("candidat validé")
+        if(response.status == 200){
+            const response = await AxiosService.deleteEventCandidate(event_id, candidat_id, valid_token)
+            console.log(response)
+            console.log("candidature rejeté")
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}
+
+export const cancelCandidate = async (event_id: string, candidat_id: string, valid_token: string) => {
+    try{
+        const response = await AxiosService.deleteEventCandidate(event_id, candidat_id, valid_token)
+        console.log(response)
+        console.log("candidat rejeté")
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}
+
+export const postCandidate = async (event_id: string, candidat_id: string, valid_token: string) => {
+    try{
+        const response = await AxiosService.addEventCandidate(event_id, candidat_id, valid_token)
+        console.log(response)
+        console.log("candidat ajouté")
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}
+
+export const deleteCandidate = async (event_id: string, candidat_id: string, valid_token: string) => {
+    try{
+        const response = await AxiosService.deleteEventValidateCandidate(event_id, candidat_id, valid_token)
+        console.log(response)
+        console.log("candidat validé supprimée")
+        if(response.status == 200){
+            const response = await AxiosService.addEventCandidate(event_id, candidat_id, valid_token)
+            console.log(response)
+            console.log("candidat ajouté")
+        }
+    }catch(e: any){
+        console.log('ERROR:', e)
+    }
+}

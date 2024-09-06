@@ -19,6 +19,7 @@ export function CreateEventForm() {
   const [eventLevel, setEventLevel] = useState<string>("D4");
   const [eventInfos, setEventInfos] = useState<string>("");
   const [eventPlace, setEventPlace] = useState<string>("");
+  const [eventSlots, setEventSlots] = useState<string>("1");
   const user = useUserConnected();
   const events = useUserConnectedEvents();
 
@@ -31,6 +32,7 @@ export function CreateEventForm() {
       level: eventLevel,
       contentText: eventInfos,
       place: eventPlace,
+      slots: parseInt(eventSlots),
     };
     try {
       const newEvent = await postUserEvent(
@@ -115,6 +117,16 @@ export function CreateEventForm() {
                 <option value="R1">R1</option>
                 <option value="N3">N3</option>
               </select>
+            </div>
+            <div className="flex flex-col gap-4">
+              <label htmlFor="new-event-slots">
+                Nombres de participants :{" "}
+              </label>
+              <input
+                type="text"
+                value={eventSlots}
+                onChange={(e) => setEventSlots(e.currentTarget.value)}
+              />
             </div>
           </div>
           <div id="right-side" className="w-2/4 h-full flex flex-col gap-4">

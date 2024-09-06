@@ -182,7 +182,6 @@ export class AxiosService {
     }
 
     static postUserEvent = async (event: Event, valid_token: Token) => {
-        // console.log('Event envoyé :', event)
         try{
             const response = await http.post("/event", { ...event }, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true}})
             return response
@@ -196,6 +195,50 @@ export class AxiosService {
         // console.log('Event envoyé :', event)
         try{
             const response = await http.put(`/event/${event_id}`, { ...update }, { headers: {"Authorization" : `Bearer ${valid_token}`} })
+            console.log(response)
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static addEventCandidate = async (event_id: string, candidate_id: string, valid_token: string) => {
+        try{
+            const response = await http.post("/event/candidate", {}, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {event_id: event_id, candidate_id: candidate_id}})
+            console.log(response)
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static deleteEventCandidate = async (event_id: string, candidate_id: string, valid_token: string) => {
+        try{
+            const response = await http.delete("/event/candidate", { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {event_id: event_id, candidate_id: candidate_id}})
+            console.log(response)
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static addEventValidateCandidate = async (event_id: string, candidate_id: string, valid_token: string) => {
+        try{
+            const response = await http.post("/event/candidate_validate", {}, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {event_id: event_id, candidate_id: candidate_id}})
+            console.log(response)
+            return response
+        }catch(error){
+            console.log("ERROR =>", error)
+            throw(error)
+        }
+    }
+
+    static deleteEventValidateCandidate = async (event_id: string, candidate_id: string, valid_token: string) => {
+        try{
+            const response = await http.delete("/event/candidate_validate", { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {event_id: event_id, candidate_id: candidate_id}})
             console.log(response)
             return response
         }catch(error){
