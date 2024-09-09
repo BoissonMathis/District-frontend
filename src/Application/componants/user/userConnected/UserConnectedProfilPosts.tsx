@@ -10,7 +10,6 @@ export function UserConnectedProfilPosts() {
   const UserConnectedPosts = useUserConnectedPosts();
 
   useEffect(() => {
-    console.log("ok");
     UserConnectedPosts
       ? setDisplayPosts(UserConnectedPosts?.posts)
       : setDisplayPosts([]);
@@ -21,7 +20,7 @@ export function UserConnectedProfilPosts() {
       {displayPosts && displayPosts.length > 0 ? (
         displayPosts.map((post) => <PostComponent key={post._id} post={post} />)
       ) : (
-        <span className="flex justify-center">
+        <span className="flex justify-center mb-6">
           Vous n'avez encore rien posté
         </span>
       )}

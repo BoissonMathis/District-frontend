@@ -62,19 +62,6 @@ export function EventDetail() {
     }
   };
 
-  const handleCandidateValidate = async (
-    event_id: string,
-    user_id: string,
-    token: string
-  ) => {
-    try {
-      await deleteCandidate(event_id, user_id, token);
-      getEventToDisplay();
-    } catch (error) {
-      console.error("Error during candidature:", error);
-    }
-  };
-
   useEffect(() => {
     getEventToDisplay();
   }, [token, id, updateFormOpened]);
@@ -86,24 +73,22 @@ export function EventDetail() {
           <UpdateEventForm event={event} />
         ) : (
           <div className="flex flex-col gap-12 align-center items-center w-full mt-6">
-            <div className="flex flex-col w-[70%] p-6 mx-auto">
-              {user._id == userConnected._id && (
-                <div>
-                  <MdEdit
-                    className="mr-16 mb-4 h-6 w-6 cursor-pointer"
-                    onClick={() => setUpdateFormEvent()}
-                  />
-                </div>
-              )}
-
-              <div className="flex gap-12 w-[100%] space-x-[30%] justify-center">
-                <div className="flex flex-col gap-4">
-                  <span>Organisateur : {user.username}</span>
-                  <span>type : {event.type}</span>
-                  <span>date : {event.date}</span>
-                  <span>catégorie : {event.categorie}</span>
-                  <span>niveau : {event.level}</span>
-                </div>
+            <div className="flex flex-col w-[60%] p-6">
+              <div className="flex relative w-full p-6 justify-around border-2 border-custom-brown rounded-2xl">
+                {user._id == userConnected._id && (
+                  <div className="absolute top-4 right-4">
+                    <MdEdit
+                      className="h-6 w-6 cursor-pointer"
+                      onClick={() => setUpdateFormEvent()}
+                    />
+                  </div>
+                )}
+                <ul className="grid grid-cols-2 gap-6 w-[40%]">
+                  <li>Type : {event.type}</li>
+                  <li>Date : {event.date}</li>
+                  <li>Catégorie : {event.categorie}</li>
+                  <li>Niveau : {event.level}</li>
+                </ul>
                 <div className="flex flex-col gap-4 items-center justify-center">
                   <img
                     src={user.profil_image}
@@ -115,11 +100,11 @@ export function EventDetail() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col mt-6 gap-4">
+              <div className="flex flex-col mt-6 p-6 gap-4 border-2 border-custom-brown rounded-2xl">
                 <span>informations complémentaire : </span>
                 <p className="pl-4">{event.contentText}</p>
               </div>
-              <div className="flex mt-6 gap-4">
+              <div className="flex mt-6 p-6 gap-4 border-2 border-custom-brown rounded-2xl">
                 <span>lieu : </span>
                 <span>{event.place}</span>
               </div>

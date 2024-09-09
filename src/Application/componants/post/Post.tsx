@@ -144,6 +144,13 @@ export function PostComponent(props: PostProps) {
         onClick={() => navigate(`/post/${post!._id}`)}
       >
         <span>{post!.contentText}</span>
+        {post.contentImage && (
+          <img
+            src={post.contentImage}
+            alt=""
+            className="w-full max-h-64 object-contain mt-6"
+          />
+        )}
       </div>
       <div className="flex gap-16 justify-center">
         <div

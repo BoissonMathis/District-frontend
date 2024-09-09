@@ -26,9 +26,9 @@ export const usePostFormStatus = () => {
     return updatePostForm
 }
 
-export const postUserPost = async (user_id: string, contentText: string, token: Token) => {
+export const postUserPost = async (user_id: string, contentText: string, token: Token, file?: File | null) => {
     try {
-        const response = await AxiosService.postUserPost(user_id, contentText, token);
+        const response = await AxiosService.postUserPost(user_id, contentText, token, file);
         console.log(response)
         if (response.status === 201 && response.data) {
             return response.data;

@@ -66,14 +66,27 @@ export class AxiosService {
         }
     }
 
-    static postUserPost = async (user_id: string, contentText: string, valid_token: Token) => {
-        try{
-            const response = await http.post("/post", { user: user_id, contentText: contentText}, { headers: {"Authorization" : `Bearer ${valid_token}`}, params: {populate: true}})
-            return response
-        }catch(error){
-            console.log("ERROR =>", error)
-            throw(error)
-        }
+    static postUserPost = async (user_id: string, contentText: string, valid_token: Token, file?: File | null) => {
+        try {
+            const formData = new FormData();
+            
+            if (file) {
+              formData.append('image', file);
+            }
+        
+            const response = await http.post('/post', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${valid_token}`,
+              },
+              params: { populate: true, user_id: user_id, content: contentText },
+            });
+        
+            return response;
+          } catch (error) {
+            console.error('ERROR =>', error);
+            throw error;
+          }
     }
 
     //post

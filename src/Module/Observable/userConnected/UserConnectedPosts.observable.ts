@@ -8,6 +8,7 @@ export type Post = {
     _id: string,
     user: User,
     contentText: string,
+    contentImage?: string,
     like: string[],
     repost: string[],
     comments: string[],
