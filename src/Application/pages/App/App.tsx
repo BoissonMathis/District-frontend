@@ -10,7 +10,7 @@ export function App() {
     getUserConnectedFeed(user_id, token);
   }, []);
   return (
-    <div className="flex flex-col b-beige w-full items-center pt-8 pb-8">
+    <div className="flex flex-col b-beige w-full items-center pt-8 pb-8 font-sans">
       <UserFeed />
     </div>
   );

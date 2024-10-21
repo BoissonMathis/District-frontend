@@ -8,7 +8,7 @@ export function UserFeed() {
       {feed && feed.posts && feed.posts.length > 0 ? (
         feed.posts.map((post) => <PostComponent key={post._id} post={post} />)
       ) : (
-        <div className="flex justify-center">aucun compte suivis</div>
+        <div className="flex justify-center">aucun compte suivi</div>
       )}
     </div>
   );

@@ -8,7 +8,7 @@ export function UserNav() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex col p-4 gap-4 border-r border-r-3 border-black h-auto w-fit">
+    <div className="flex flex col p-4 gap-4 border-r border-r-3 border-black h-auto w-fit font-heading">
       <div
         className="flex items-center gap-2 cursor-pointer"
         onClick={() => {

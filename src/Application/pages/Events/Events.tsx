@@ -4,7 +4,7 @@ import { SearchEventResults } from "../../componants/event/SearchEventResults";
 
 const Events = () => {
   return (
-    <div>
+    <div className="w-full">
       <SearchEventForm />
       <SearchEventResults />
     </div>

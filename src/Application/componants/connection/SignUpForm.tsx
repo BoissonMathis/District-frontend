@@ -11,7 +11,18 @@ export function SignUpForm() {
   const [status, setStatus] = useState<string>("joueur");
   const [termsOfUseChecked, setTermsOfUseChecked] = useState<boolean>(false);
   const navigate = useNavigate();
-  /// faire la partie condition d'utilisation (si open : overlay visible, sinon invisible)
+
+  const closeModal = (e: any) => {
+    if (e.target.id === "overlay") {
+      setIsOpen(false);
+    }
+  };
+
+  const acceptAndClose = () => {
+    setTermsOfUseChecked(true);
+    setIsOpen(false);
+  };
+
   return (
     <div className="col items-center justify-center">
       <div className="auth-input-text-form mb-8">
@@ -54,6 +65,7 @@ export function SignUpForm() {
         <input
           type="checkbox"
           id="remember"
+          checked={termsOfUseChecked}
           onChange={() => setTermsOfUseChecked(!termsOfUseChecked)}
         />
         <label htmlFor="remember">
@@ -97,6 +109,76 @@ export function SignUpForm() {
       <a className="form-a" onClick={() => navigate("/login")}>
         S'authentifier
       </a>
+
+      {isOpen && (
+        <div
+          id="overlay"
+          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white p-6 rounded-lg w-11/12 md:w-2/3 relative flex flex-col justify-center items-center text-sm"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+              onClick={() => setIsOpen(false)}
+            >
+              &times;
+            </button>
+
+            <h2 className="text-xl font-bold mb-4 text-center">
+              Bienvenue sur District !
+            </h2>
+            <p>
+              En utilisant notre plateforme, vous acceptez nos conditions
+              d'utilisation et notre politique de confidentialité. Voici un
+              résumé des principaux points :
+            </p>
+            <ol className="mb-4 mt-4 text-sm text-left list-decimal pl-5">
+              <li>
+                <strong>Collecte de données :</strong> Nous collectons certaines
+                informations personnelles, telles que votre adresse e-mail et
+                votre mot de passe, pour vous offrir une expérience
+                personnalisée sur notre réseau social.
+              </li>
+              <li>
+                <strong>Utilisation des données :</strong> Vos données seront
+                utilisées pour vous fournir des fonctionnalités et des services
+                et améliorer notre plateforme.
+              </li>
+              <li>
+                <strong>Partage des données :</strong> Nous ne partagerons pas
+                vos informations personnelles avec des tiers sans votre
+                consentement explicite, sauf si cela est nécessaire pour fournir
+                nos services ou si nous y sommes légalement obligés.
+              </li>
+              <li>
+                <strong>Protection des données :</strong> Nous prenons des
+                mesures de sécurité appropriées pour protéger vos informations
+                contre tout accès non autorisé, divulgation, altération ou
+                destruction.
+              </li>
+              <li>
+                <strong>Vos droits :</strong> Vous avez le droit d'accéder à vos
+                données, de les rectifier, de les supprimer, de limiter leur
+                traitement et de les transférer vers un autre service.
+              </li>
+            </ol>
+            <p>
+              En acceptant nos conditions d'utilisation et notre politique de
+              confidentialité, vous consentez à la collecte, au traitement et à
+              l'utilisation de vos données conformément à ces directives.{" "}
+            </p>
+            <p
+              className="underline cursor-pointer text-sm"
+              onClick={acceptAndClose}
+            >
+              Accepter et fermer
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,12 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getEventSearchResults,
   setEventSearchResults,
 } from "../../../Module/Observable/event/EventSearchResults.observable";
-import {
-  userToken$,
-  useUserToken,
-} from "../../../Module/Observable/userConnected/UserToken.observable";
+import { useUserToken } from "../../../Module/Observable/userConnected/UserToken.observable";
 
 export function SearchEventForm() {
   const [eventType, setEventType] = useState<string>("");
@@ -37,10 +34,24 @@ export function SearchEventForm() {
     }
   };
 
+  useEffect(() => {
+    console.log("LAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    getEventSearchResults(
+      {
+        type: eventType,
+        date: eventDate,
+        categorie: eventCategorie,
+        level: eventLevel,
+      },
+      localStorage.token,
+      1
+    );
+  }, []);
+
   return (
-    <div>
-      <h2>Trouver un événement :</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center gap-8 w-full">
+      <h2 className="text-2xl mt-6">Trouver un événement</h2>
+      <form onSubmit={handleSubmit} className="flex items-center gap-8">
         <div id="type">
           <label htmlFor="new-event-type">Type : </label>
           <select

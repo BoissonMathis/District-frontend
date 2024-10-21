@@ -56,7 +56,7 @@ export function UpdateUserForm() {
 
   return (
     <div className="flex flex-col justify-center items-center b-gray h-full relative z-20">
-      <div className="flex flex-col gap-10 pt-4 items-center border-2 border-brown b-beige w-3/5 h-4/5 h-16 rounded-xl relative">
+      <div className="flex flex-col gap-6 pt-4 items-center border-2 border-brown b-beige w-3/5 h-4/5 h-16 rounded-xl relative">
         <ImCross
           className="cursor-pointer absolute top-4 right-4 z-30"
           onClick={() => setUpdateFormUser()}
@@ -117,7 +117,7 @@ export function UpdateUserForm() {
           placeholder="Entrez votre texte ici..."
           onChange={(e) => setBio(e.currentTarget.value)}
         />
-        <button className="auth-btn" onClick={handleUpdateUser}>
+        <button className="auth-btn mb-6" onClick={handleUpdateUser}>
           Valider
         </button>
       </div>

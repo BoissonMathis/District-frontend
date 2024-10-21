@@ -14,13 +14,15 @@ export function Login() {
     if (token && token.token !== null) {
       navigate("/");
     }
-  }, [token]);
+  }, [token, navigate]);
 
   return (
-    <div className="col gap-16 items-center justify-center h-screen b-beige">
-      <h1 className="text-8xl c-brown">DISTRICT</h1>
-      <h2 className="text-xl">S'identifier</h2>
-      <LoginForm />
+    <div className="flex flex-col gap-8 items-center justify-center h-screen b-beige px-4">
+      <h1 className="text-6xl md:text-8xl text-center c-brown">DISTRICT</h1>
+      <h2 className="text-lg md:text-xl text-center">S'identifier</h2>
+      <div className="w-full max-w-md">
+        <LoginForm />
+      </div>
       <ErrorMessage />
     </div>
   );

@@ -47,6 +47,7 @@ export const useEventSearchResults = () => {
 export const getEventSearchResults = async (search: any, token: Token, page: number) => {
     try {
         const response = await AxiosService.getManyEvents(token, page, search)
+        console.log(response)
         return response
     }catch(e: any){
         console.log('ERROR:', e)

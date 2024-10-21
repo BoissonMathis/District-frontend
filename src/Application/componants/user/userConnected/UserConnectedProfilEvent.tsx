@@ -31,7 +31,7 @@ export function UserConnectedProfilEvents() {
           <EventComponant key={event._id} event={event} />
         ))
       ) : (
-        <span className="p-4">Vous n'avez pas encore créée d'événements</span>
+        <span className="p-4">Vous n'avez pas encore créé d'événements</span>
       )}
     </div>
   );

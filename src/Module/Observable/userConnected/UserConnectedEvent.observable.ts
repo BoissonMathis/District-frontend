@@ -14,9 +14,9 @@ export type Event = {
     contentText: string,
     place?: string,
     slots: number,
-    candidate: User[],
-    candidate_validate: User[],
-    completed: boolean
+    candidate?: User[],
+    candidate_validate?: User[],
+    completed?: boolean
 }
 
 export type EventsInfo = {

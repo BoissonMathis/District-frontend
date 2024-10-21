@@ -74,7 +74,7 @@ export function EventDetail() {
         ) : (
           <div className="flex flex-col gap-12 align-center items-center w-full mt-6">
             <div className="flex flex-col w-[60%] p-6">
-              <div className="flex relative w-full p-6 justify-around border-2 border-custom-brown rounded-2xl">
+              <div className="flex relative w-full p-6 items-center justify-center border-2 border-custom-brown rounded-2xl bg-custom-soft-brown">
                 {user._id == userConnected._id && (
                   <div className="absolute top-4 right-4">
                     <MdEdit
@@ -83,7 +83,7 @@ export function EventDetail() {
                     />
                   </div>
                 )}
-                <ul className="grid grid-cols-2 gap-6 w-[40%]">
+                <ul className="grid grid-cols-2 gap-6 w-[65%]">
                   <li>Type : {event.type}</li>
                   <li>Date : {event.date}</li>
                   <li>Catégorie : {event.categorie}</li>
@@ -100,17 +100,17 @@ export function EventDetail() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col mt-6 p-6 gap-4 border-2 border-custom-brown rounded-2xl">
-                <span>informations complémentaire : </span>
+              <div className="flex flex-col mt-6 p-6 gap-4 border-2 border-custom-brown rounded-2xl bg-custom-soft-brown">
+                <span>informations complémentaires : </span>
                 <p className="pl-4">{event.contentText}</p>
               </div>
-              <div className="flex mt-6 p-6 gap-4 border-2 border-custom-brown rounded-2xl">
+              <div className="flex mt-6 p-6 gap-4 border-2 border-custom-brown rounded-2xl bg-custom-soft-brown">
                 <span>lieu : </span>
                 <span>{event.place}</span>
               </div>
             </div>
             {user._id == userConnected._id ? (
-              <div className="flex flex-col gap-4 items-center">
+              <div className="flex flex-col gap-4 items-center mb-8">
                 <CandidateCount
                   candidate={event.candidate.length}
                   candidateValidate={event.candidate_validate.length}

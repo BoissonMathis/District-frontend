@@ -23,7 +23,7 @@ export function UserConnectedProfilComments() {
         ))
       ) : (
         <span className="flex self-center p-6">
-          Vous n'avez encore rien posté
+          Vous n'avez encore rien commenté
         </span>
       )}
     </div>
